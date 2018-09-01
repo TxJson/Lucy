@@ -1,0 +1,127 @@
+Lucy
+* Main Menu
+	- Should be controlled with key or number input.
+	- Includes, but not limited to:
+		_[Start]
+			-> New Game
+				- Are you sure?
+					*- Yes
+						--> Start new game.
+							-->_Proceed to preparation.
+					*- No
+						--> Go back to [Start]
+			-> Load Game
+				- Maximum of 3 saves. Choose a game file.
+					*- Example: SAVE_01 [Name of your choosing]
+						**- Are you sure?
+						**- ("Could possibly include some information regarding the save. Level, Location, class etc")
+							_Yes
+								- Continue where you previously saved.
+							_No
+								- Go back to [Start]
+			-> Back
+				- Takes you back to the main menu.
+		_
+		_[Exit]
+* Preparation
+	- Includes, but not limited to:
+		_[Username]
+			-> Pick a [Username]?
+				- Yes
+					*- Choose an [Username]:
+				- No
+					*- If you won't choose a username, it will automatically go with 'Lucy'.
+					*- Are you sure?
+						- Yes
+							**- Proceed to ("Game")
+						- No
+							**- Proceed to ("Choose an [Username]")
+		_[Class]
+			-> Pick a [Class]
+				- Adventurer
+					*- DESCRIPTION:
+					The Adventurer is better at finding resources such
+					as food, water etc. It is harder for the Adventurer at
+					fighting anything other than animals.
+				- Fighter
+					*- DESCRIPTION:
+					While it may be harder for the Fighter to gather food, he
+					makes this up by being one of the stronger classes. A Fighter is
+					better at killing of all enemies since his attacks
+					are stronger and more swift.
+				- Escapist
+					*- DESCRIPTION:
+					An Escapist knows the way of the woods. No matter
+					what fight he is in, he always knows a way out. While he isn't
+					the strongest, his attacks are swift and he may even be
+					able to hit multiple hits before the enemies can blink.
+
+* Game
+	- DESCRIPTION:
+		About a girl named Lucy and her dog. You venture through an unknown
+		forest where you will go up against multiple enemies with your dog. You will also
+		encounter different towns while on your way. More or less endless game,
+		Lucy is an adventurer. Her dog is rather unpredictable, should include the option to
+		later on kill the dog, if the player desire to do so.
+
+	- Player
+		_INITIAL_HEALTH: 200
+			*- ADJUSTED_HEALTH: ([INITIAL_HEALTH] + (([INITIAL_HEALTH/20]*PLAYER_LEVEL)))
+		_INITIAL_LEVEL: 1
+	- Enemies:
+		_[Bandits]
+			_> ENCOUNTER_RATE: 50%
+				-> Bandit
+					- INITIAL HEALTH: 150
+						*- ADJUSTED_HEALTH: ([INITIAL_HEALTH] * [PLAYER_LEVEL])/([PLAYER_LEVEL]*2)
+					- DROP: Gold
+						*- AMOUNT: Randomized between (5-20)
+					- DROP: Weaponry: ex some kind of sword.
+						*- AMOUNT: 1
+					- DROP_RATE_CHANCE: 100%
+					- DROP_RATE_ITEMS: 50%/50% on being Weaponry/Gold.
+					- ENCOUNTER_RATE: 75% (0.75*[Bandits].ENCOUNTER_RATE)
+				-> Bandit King
+					- INITIAL HEALTH: 500
+						*- ADJUSTED_HEALTH: ([INITIAL_HEALTH] * [PLAYER_LEVEL])/([PLAYER_LEVEL]*2)
+					- DROP: Gold
+						*- AMOUNT: Randomized between (50-200)
+					- DROP_RATE_CHANCE: 70%
+					- DROP_RATE_ITEMS: 100% on being gold.
+					- ENCOUNTER_RATE: 5% (0.05*[Bandits].ENCOUNTER_RATE)
+				-> Bandit Queen
+					- INITIAL HEALTH: 300
+						*- ADJUSTED_HEALTH: ([INITIAL_HEALTH] * [PLAYER_LEVEL])/([PLAYER_LEVEL]*2)
+					- DROP: Jewelry that you can sell in a town. ("Beware, takes up space in backpack")
+						*- AMOUNT: 1
+					- DROP_RATE_CHANCE: 25%
+					- DROP_RATE_ITEMS: 100% on being Jewelry.
+					- ENCOUNTER_RATE: 20% (0.20*[Bandits].ENCOUNTER_RATE)
+		_[Animals]
+			_> ENCOUNTER_RATE: 50%
+				-> Snake
+					- INITIAL HEALTH: 50
+						*- ADJUSTED_HEALTH: ([INITIAL_HEALTH] * [PLAYER_LEVEL])/([PLAYER_LEVEL]*2)
+					- DROP: Snake skin
+						*- AMOUNT: Randomized between (2-4)
+					- DROP_RATE_CHANCE: 50%
+					- DROP_RATE_ITEMS: 100% Snake skin.
+					- ENCOUNTER_RATE: 50% (0.50*[Animals].ENCOUNTER_RATE)
+				-> Bear
+					- INITIAL HEALTH: 200
+						*- ADJUSTED_HEALTH: ([INITIAL_HEALTH] * [PLAYER_LEVEL])/([PLAYER_LEVEL]*2)
+					- DROP: Claws
+						*- AMOUNT: Randomized between (2-5)
+					- DROP_RATE_CHANCE: 25%
+					- DROP_RATE_ITEMS: 100% Claws.
+					- ENCOUNTER_RATE: 30% (0.30*[Animals].ENCOUNTER_RATE)
+				-> Mad Pig
+					- INITIAL HEALTH: 300
+						*- ADJUSTED_HEALTH: ([INITIAL_HEALTH] * [PLAYER_LEVEL])/([PLAYER_LEVEL]*2)
+					- DROP: Gold
+						*- AMOUNT: Randomized between (25-50)
+					- DROP: Pig Hide
+						*- AMOUNT: Randomized between (2-7)
+					- DROP_RATE_CHANCE: 25%
+					- DROP_RATE_ITEMS: 100% Claws.
+					- ENCOUNTER_RATE: 20% (0.20*[Animals].ENCOUNTER_RATE)
