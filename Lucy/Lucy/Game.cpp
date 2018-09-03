@@ -1,21 +1,18 @@
 #include "Game.h"
 
-
-
 Game::Game()
 {
 	myCho = 0;
-	myGState = GameState::GAME;
+	myGState = GameState::MENU;
 	myIsRunning = true;
 }
-
 
 Game::~Game()
 {}
 
 void Game::Run()
 {
-	while (myIsRunning) 
+	while (myIsRunning)
 	{
 		Update();
 	}
@@ -23,16 +20,16 @@ void Game::Run()
 
 void Game::Update()
 {
-	switch (myGState) 
+	switch (myGState)
 	{
-		case GameState::MENU:
-			ClearScreen();
-			cout << "Hello There" << endl; //Test
-			break;
+	case GameState::MENU:
+		ClearScreen();
+		cout << "Hello There" << endl; //Test
+		break;
 
-		case GameState::GAME:
+	case GameState::GAME:
 
-			break;	
+		break;
 	}
 }
 

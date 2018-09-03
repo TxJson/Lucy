@@ -25,4 +25,3 @@ public:
 	int myCho; //My Choice
 	GameState myGState;
 };
-
