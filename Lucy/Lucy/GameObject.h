@@ -1,17 +1,31 @@
-#pragma once
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
+#include <string>
 
 class GameObject
 {
 public:
 	GameObject();
-	~GameObject();
+	virtual ~GameObject();
 
 	virtual void Update();
 
-public:
 	int myDamage,
 		myHealth;
 	bool myIsAlive;
+	float myEncounterRate;
 
+	/*
+	byte myCharacterID;
+
+	string myCharacters[3] =
+	{
+		"Adventurer",
+		"Fighter",
+		"Escapist"
+	};
+	*/
 };
 
+#endif

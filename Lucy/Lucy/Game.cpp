@@ -1,4 +1,7 @@
 #include "Game.h"
+#include "pch.h"
+#include <stdlib.h>
+#include "Player.h"
 
 Game::Game()
 {
@@ -23,17 +26,13 @@ void Game::Update()
 	switch (myGState)
 	{
 	case GameState::MENU:
-		ClearScreen();
-		cout << "Hello There" << endl; //Test
+
+		Empty();
+		//Print("Hello There, General Kenobi");
 		break;
 
 	case GameState::GAME:
-
+		myPlayer.Update();
 		break;
 	}
-}
-
-void Game::ClearScreen()
-{
-	system("CLS");
 }

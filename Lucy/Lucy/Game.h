@@ -1,10 +1,8 @@
-#pragma once
+#ifndef GAME_H
+#define GAME_H
 
-#include "pch.h"
 #include "GameStates.h"
-#include <stdlib.h>
-
-using namespace std;
+#include "Player.h"
 
 class Game
 {
@@ -14,14 +12,15 @@ public:
 
 	void Run();
 	void Update();
-	static void ClearScreen();
+	int myCho; //My Choice
+	GameState myGState;
+	Player myPlayer;
 
 	//Accessors
 	inline bool GetIsRunning() const { return this->myIsRunning; }
 
 private:
 	bool myIsRunning; //'TRUE' if game is running.
-public:
-	int myCho; //My Choice
-	GameState myGState;
 };
+
+#endif
