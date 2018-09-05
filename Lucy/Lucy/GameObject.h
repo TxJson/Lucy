@@ -15,17 +15,6 @@ public:
 		myHealth;
 	bool myIsAlive;
 	float myEncounterRate;
-
-	/*
-	byte myCharacterID;
-
-	string myCharacters[3] =
-	{
-		"Adventurer",
-		"Fighter",
-		"Escapist"
-	};
-	*/
 };
 
 #endif

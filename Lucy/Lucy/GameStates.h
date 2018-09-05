@@ -1,8 +1,7 @@
 #pragma once
 
-enum class GameState 
+enum class GameState
 {
 	MENU,
-	PREPARATION,
 	GAME
 };

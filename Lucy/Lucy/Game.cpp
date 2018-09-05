@@ -2,16 +2,17 @@
 #include "pch.h"
 #include <stdlib.h>
 #include "Player.h"
+#include "Menu.h";
 
 Game::Game()
 {
-	myCho = 0;
 	myGState = GameState::MENU;
 	myIsRunning = true;
 }
 
 Game::~Game()
-{}
+{
+}
 
 void Game::Run()
 {
@@ -26,9 +27,7 @@ void Game::Update()
 	switch (myGState)
 	{
 	case GameState::MENU:
-
-		Empty();
-		//Print("Hello There, General Kenobi");
+		myMenu.Update();
 		break;
 
 	case GameState::GAME:
