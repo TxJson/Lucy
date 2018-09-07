@@ -20,4 +20,5 @@ inline void Print(std::string &someText)
 {
 	std::cout << someText << std::endl;
 }
+
 #endif

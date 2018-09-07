@@ -22,14 +22,13 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameStates.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
@@ -37,7 +36,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{F649FC64-63D6-44FE-86B2-01AE9EDE0099}</ProjectGuid>
     <RootNamespace>Lucy</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -1,8 +1,7 @@
 #include "Game.h"
 #include "pch.h"
 #include <stdlib.h>
-#include "Player.h"
-#include "Menu.h";
+#include "Constants.h"
 
 Game::Game()
 {
@@ -27,7 +26,7 @@ void Game::Update()
 	switch (myGState)
 	{
 	case GameState::MENU:
-		myMenu.Update();
+		MainMenu();
 		break;
 
 	case GameState::GAME:
@@ -35,3 +34,30 @@ void Game::Update()
 		break;
 	}
 }
+
+void Game::MainMenu()
+{
+	Print("GAME: " NAME);
+	Print("Code Author: " AUTHOR "\n");
+	Print("[1] Start");
+	Print("[2] Exit");
+
+
+	string tempCho;
+	std::getline(std::cin, tempCho);
+	try
+	{
+		myCho = std::stoi(tempCho);
+	}
+	catch (...) {}
+	switch (myCho)
+	{
+	case 1:
+		myGState = GameState::GAME;
+		break;
+	case 2:
+		myIsRunning = false;
+		break;
+	}
+}
+

@@ -3,7 +3,6 @@
 
 #include "GameStates.h"
 #include "Player.h"
-#include "Menu.h"
 
 class Game
 {
@@ -13,10 +12,12 @@ public:
 
 	void Run();
 	void Update();
+	void MainMenu();
 
-	GameState myGState;
 	Player myPlayer;
-	Menu myMenu;
+	GameState myGState;
+
+	int myCho;
 
 	//Accessors
 	inline bool GetIsRunning() const { return this->myIsRunning; }

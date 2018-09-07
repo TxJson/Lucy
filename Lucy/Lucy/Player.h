@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "GameObject.h"
-#include "pch.h"
 using namespace std;
 
 class Player : public GameObject
