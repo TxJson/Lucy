@@ -30,6 +30,8 @@ void Game::Update()
 		break;
 
 	case GameState::GAME:
+		myStory.Update();
+		myMap.Update();
 		myPlayer.Update();
 		break;
 	}
@@ -41,7 +43,6 @@ void Game::MainMenu()
 	Print("Code Author: " AUTHOR "\n");
 	Print("[1] Start");
 	Print("[2] Exit");
-
 
 	string tempCho;
 	std::getline(std::cin, tempCho);
@@ -60,4 +61,3 @@ void Game::MainMenu()
 		break;
 	}
 }
-
