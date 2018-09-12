@@ -11,15 +11,17 @@ public:
 
 	virtual void Update();
 
-protected:
-	string myName;
+	std::string myName;
 	bool myIsAlive;
-	int myLevel;
+	int
+		myLevel;
 	float
 		myEncounterRate,
 		myDropRateChance,
 		myDamage,
-		myHealth;
+		myHealth,
+		myHunger,
+		myWater;
 };
 
 #endif

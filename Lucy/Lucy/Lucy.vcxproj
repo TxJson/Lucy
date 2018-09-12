@@ -24,20 +24,19 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Story.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameInfoConst.h" />
+    <ClInclude Include="GameConst.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameStates.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerInfoConst.h" />
-    <ClInclude Include="Story.h" />
+    <ClInclude Include="PlayerConst.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="WorldConst.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -4,7 +4,6 @@
 #include "GameStates.h"
 #include "Player.h"
 #include "World.h"
-#include "Story.h"
 
 class Game
 {
@@ -19,7 +18,6 @@ public:
 	Player myPlayer;
 	GameState myGState;
 	World myWorld;
-	Story myStory;
 
 	int myCho;
 

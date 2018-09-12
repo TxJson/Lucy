@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "pch.h"
 #include <stdlib.h>
-#include "GameInfoConst.h"
+#include "GameConst.h"
 
 Game::Game()
 {
@@ -30,9 +30,8 @@ void Game::Update()
 		break;
 
 	case GameState::GAME:
-		myStory.Update();
-		myWorld.Update();
 		myPlayer.Update();
+		myWorld.Update();
 		break;
 	}
 }
@@ -44,7 +43,7 @@ void Game::MainMenu()
 	Print("[1] Start");
 	Print("[2] Exit");
 
-	string tempCho;
+	std::string tempCho;
 	std::getline(std::cin, tempCho);
 	try
 	{

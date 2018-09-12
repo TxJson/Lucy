@@ -1,0 +1,7 @@
+#ifndef WORLDCONST_H
+#define WORLDCONST_H
+
+#define WORLD_MAX_AREA_SIZE 15
+#define WORLD_MAX_PATH_AMOUNT 5
+
+#endif

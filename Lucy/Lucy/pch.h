@@ -4,7 +4,6 @@
 #include <memory>
 #include <iostream>
 #include <string>
-#include <windows.h>
 
 inline void Empty()
 {
