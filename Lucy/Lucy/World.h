@@ -1,9 +1,9 @@
 #pragma once
-class Map
+class World
 {
 public:
-	Map();
-	~Map();
+	World();
+	~World();
 
 	void Update();
 };

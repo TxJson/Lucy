@@ -1,9 +1,12 @@
 #include "Player.h"
 #include "pch.h"
+#include "PlayerInfoConst.h"
 
 Player::Player()
 {
-	myHealth = 200;
+	myName = PLAYER_NAME;
+	myHealth = PLAYER_INITIAL_HEALTH;
+	myDamage = PLAYER_INITIAL_DAMAGE;
 }
 
 Player::~Player()
@@ -12,5 +15,5 @@ Player::~Player()
 
 void Player::Update()
 {
-	Print("Hello World");
+	Print(myName);
 }

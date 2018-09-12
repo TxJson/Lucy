@@ -1,5 +1,5 @@
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+#ifndef GAMEINFOCONSTANTS_H
+#define GAMEINFOCONSTANTS_H
 
 #define NAME "Lucy"
 #define VERSION 0.01

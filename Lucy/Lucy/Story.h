@@ -1,4 +1,13 @@
-#pragma once
+#ifndef STORY_H
+#define STORY_H
+
+enum Act
+{
+	ONE,
+	TWO,
+	THREE
+};
+
 class Story
 {
 public:
@@ -7,3 +16,4 @@ public:
 
 	void Update();
 };
+#endif

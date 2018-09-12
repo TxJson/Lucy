@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "pch.h"
 #include <stdlib.h>
-#include "Constants.h"
+#include "GameInfoConst.h"
 
 Game::Game()
 {
@@ -31,7 +31,7 @@ void Game::Update()
 
 	case GameState::GAME:
 		myStory.Update();
-		myMap.Update();
+		myWorld.Update();
 		myPlayer.Update();
 		break;
 	}
@@ -40,7 +40,7 @@ void Game::Update()
 void Game::MainMenu()
 {
 	Print("GAME: " NAME);
-	Print("Code Author: " AUTHOR "\n");
+	Print("Author: " AUTHOR "\n");
 	Print("[1] Start");
 	Print("[2] Exit");
 

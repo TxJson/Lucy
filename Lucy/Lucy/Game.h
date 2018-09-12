@@ -3,7 +3,7 @@
 
 #include "GameStates.h"
 #include "Player.h"
-#include "Map.h"
+#include "World.h"
 #include "Story.h"
 
 class Game
@@ -18,7 +18,7 @@ public:
 
 	Player myPlayer;
 	GameState myGState;
-	Map myMap;
+	World myWorld;
 	Story myStory;
 
 	int myCho;

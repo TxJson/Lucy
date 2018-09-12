@@ -7,3 +7,7 @@ Story::Story()
 Story::~Story()
 {
 }
+
+void Story::Update()
+{
+}

@@ -11,10 +11,15 @@ public:
 
 	virtual void Update();
 
-	int myDamage,
-		myHealth;
+protected:
+	string myName;
 	bool myIsAlive;
-	float myEncounterRate;
+	int myLevel;
+	float
+		myEncounterRate,
+		myDropRateChance,
+		myDamage,
+		myHealth;
 };
 
 #endif
