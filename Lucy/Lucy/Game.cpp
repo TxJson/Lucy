@@ -23,6 +23,7 @@ void Game::Run()
 
 void Game::Update()
 {
+	Empty();
 	switch (myGState)
 	{
 	case GameState::MENU:
@@ -31,6 +32,7 @@ void Game::Update()
 
 	case GameState::GAME:
 		myPlayer.Update();
+		ThreadSleep(25);
 		myWorld.Update();
 		break;
 	}

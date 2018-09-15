@@ -4,6 +4,8 @@
 #include <memory>
 #include <iostream>
 #include <string>
+#include <thread>
+#include <chrono>
 
 inline void Empty()
 {
@@ -18,6 +20,16 @@ inline void Print(const std::string someText)
 inline void Print(std::string &someText)
 {
 	std::cout << someText << std::endl;
+}
+
+inline void ThreadSleep(const int someTime) 
+{
+	std::this_thread::sleep_for(std::chrono::milliseconds(someTime));
+}
+
+inline int GetRand() 
+{
+	return 10;
 }
 
 #endif
