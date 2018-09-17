@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -28,13 +27,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameConst.h" />
-    <ClInclude Include="Dog.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameStates.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerConst.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
