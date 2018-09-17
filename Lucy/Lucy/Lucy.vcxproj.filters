@@ -56,9 +56,6 @@
     <ClInclude Include="Dog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldConst.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameConst.h">
       <Filter>Header Files</Filter>
     </ClInclude>

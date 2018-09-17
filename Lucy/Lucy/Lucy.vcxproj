@@ -36,7 +36,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerConst.h" />
     <ClInclude Include="World.h" />
-    <ClInclude Include="WorldConst.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
