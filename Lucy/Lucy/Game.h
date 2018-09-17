@@ -22,10 +22,10 @@ public:
 	int myCho;
 
 	//Accessors
-	inline bool GetIsRunning() const { return this->myIsRunning; }
+	inline bool GetIsRunning() const { return this->myExecutionFlag; }
 
 private:
-	bool myIsRunning; //'TRUE' if game is running.
+	bool myExecutionFlag; //'TRUE' if game is running.
 };
 
 #endif

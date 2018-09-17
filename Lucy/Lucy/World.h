@@ -1,7 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#define TOWNNAME "Rackford"
+#include "Town.h"
+#include "Dimension.h"
 
 enum Location
 {
@@ -18,16 +19,9 @@ public:
 	void Update();
 
 private:
-	void Town();
-	void Introduction();
-	void NotAvailable();
-
-	int
-		myAreaSize,
-		myPathSize;
+	Town myTown;
+	Dimension myDimension;
 	Location myLocation;
-	bool myFirstT;
-	int myCho;
 };
 
 #endif

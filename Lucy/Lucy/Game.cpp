@@ -6,7 +6,7 @@
 Game::Game()
 {
 	myGState = GameState::MENU;
-	myIsRunning = true;
+	myExecutionFlag = true;
 }
 
 Game::~Game()
@@ -15,7 +15,7 @@ Game::~Game()
 
 void Game::Run()
 {
-	while (myIsRunning)
+	while (myExecutionFlag)
 	{
 		Update();
 	}
@@ -35,16 +35,13 @@ void Game::Update()
 		break;
 	}
 	Sleep(25);
-	ResetColour();
 	Empty();
 }
 
 void Game::MainMenu()
 {
-	SetColour(12);
-	Print("GAME: " NAME);
-	Print("Author: " AUTHOR "\n");
-	ResetColour();
+	Print("GAME: " NAME, 12);
+	Print("Author: " AUTHOR "\n", 12);
 	Print("[1] Start");
 	Print("[2] Exit \n");
 
@@ -64,7 +61,7 @@ void Game::MainMenu()
 			myGState = GameState::GAME;
 			break;
 		case 2:
-			myIsRunning = false;
+			myExecutionFlag = false;
 			break;
 		}
 	}

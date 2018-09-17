@@ -1,7 +1,6 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include <memory>
 #include <iostream>
 #include <string>
 #include <windows.h>
@@ -14,20 +13,29 @@ inline void Empty()
 	system("CLS");
 }
 
-///Time in milliseconds
+//Time in milliseconds
 inline void Sleep(int someTime)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(someTime));
 }
 
-inline void Print(const std::string someText)
+inline void Print(const std::string someText, const int aColourCode = 15)
 {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), aColourCode);
 	std::cout << someText << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
 
-inline void Print(std::string &someText)
+inline void Print(std::string &someText, const int aColourCode = 15)
 {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), aColourCode);
 	std::cout << someText << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+}
+
+inline int Randomize(int &aLowAmount, int &aHighAmount)
+{
+	return (rand() % aHighAmount + aLowAmount);
 }
 
 /*
@@ -53,14 +61,12 @@ Colour codes
 */
 inline void SetColour(const int aColourCode)
 {
-	HANDLE tempHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(tempHandle, aColourCode);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), aColourCode);
 }
 
 inline void ResetColour()
 {
-	HANDLE tempHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(tempHandle, 15);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
 
 #endif
