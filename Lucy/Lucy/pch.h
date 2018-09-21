@@ -38,6 +38,19 @@ inline int Randomize(int &aLowAmount, int &aHighAmount)
 	return (rand() % aHighAmount + aLowAmount);
 }
 
+inline int Convert(const std::string aConvertableString)
+{
+	if (!aConvertableString.empty())
+	{
+		try
+		{
+			return std::stoi(aConvertableString);
+		}
+		catch (...) {}
+	}
+	return 0;
+}
+
 /*
 Colour codes
 
