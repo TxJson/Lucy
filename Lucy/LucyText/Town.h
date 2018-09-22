@@ -2,6 +2,7 @@
 #define TOWN_H
 
 #include "pch.h"
+#include "Dimension.h"
 
 #define TOWNNAME "Rackford"
 class Town
@@ -15,12 +16,14 @@ public:
 private:
 	void Introduction();
 	void NotAvailable();
-	void Dimension();
+	void OpenDimension();
 	void Shop();
 
 	bool myFirstT;
 	std::string myChoToConvert;
 	int myCho;
+
+	Dimension myDimension;
 };
 
 #endif

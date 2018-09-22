@@ -12,7 +12,7 @@ App::~App()
 
 void App::Menu()
 {
-	while (true)
+	while (1)
 	{
 		Empty();
 		Print("GAME: " NAME, 12);
@@ -25,11 +25,8 @@ void App::Menu()
 
 		if (tempCho != "")
 		{
-			try
-			{
-				myCho = std::stoi(tempCho);
-			}
-			catch (...) {}
+			myCho = Convert(tempCho);
+
 			if (myCho == 1) 
 			{
 				myTown.Run();

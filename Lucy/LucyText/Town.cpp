@@ -13,7 +13,7 @@ Town::~Town()
 
 void Town::Run()
 {
-	while (true) 
+	while (1) 
 	{
 		Empty();
 		if (myFirstT)
@@ -36,11 +36,10 @@ void Town::Run()
 				Shop();
 				break;
 			case 2:
-				Dimension();
+				OpenDimension();
 				break;
 			}
 		}
-		Empty();
 	}
 }
 
@@ -60,9 +59,11 @@ void Town::Introduction()
 
 void Town::NotAvailable()
 {
+	Print("That is currently unavailable.", 12);
+	Sleep(750);
 }
 
-void Town::Dimension()
+void Town::OpenDimension()
 {
 	while (1) 
 	{
@@ -76,7 +77,7 @@ void Town::Dimension()
 
 		if (myCho == 1) 
 		{
-			NotAvailable();
+			myDimension.Run();
 		}
 		else 
 		{
