@@ -2,11 +2,10 @@
 #include "pch.h"
 #include "WorldConst.h"
 #include <ctime>
-#include <cstdlib>
 
 World::World()
 {
-	myAreaSize = GetRand();
+	myAreaSize = WORLD_MIN_AREA+(rand()%WORLD_MAX_AREA);
 }
 
 World::~World()
@@ -15,7 +14,8 @@ World::~World()
 
 void World::Update()
 {
-	Print("HELLO WORLD");
+	Print("" + myAreaSize);
+	myAreaSize = WORLD_MIN_AREA + (rand() % WORLD_MAX_AREA);
 }
 
 void World::ComputeWorld()
