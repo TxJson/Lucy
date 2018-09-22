@@ -30,8 +30,8 @@ void Game::Update()
 		break;
 
 	case GameState::GAME:
-		myPlayer.Update();
-		myWorld.Update();
+		GPlayer.Update();
+		GWorld.Update();
 		break;
 	}
 	Sleep(25);

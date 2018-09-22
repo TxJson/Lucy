@@ -17,6 +17,7 @@ public:
 	~World();
 
 	void Update();
+	void SetLocation(const Location &aLocation) { myLocation = aLocation; }
 
 private:
 	Town myTown;

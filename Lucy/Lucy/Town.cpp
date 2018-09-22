@@ -1,4 +1,5 @@
 #include "Town.h"
+#include "Game.h"
 
 Town::Town()
 {
@@ -86,6 +87,7 @@ void Town::Dimension()
 	switch (myCho)
 	{
 	case 1:
+		Game::GWorld.SetLocation(Location::DIMENSION);
 		NotAvailable();
 		break;
 	case 2:

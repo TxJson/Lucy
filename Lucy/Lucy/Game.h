@@ -15,9 +15,8 @@ public:
 	void Update();
 	void MainMenu();
 
-	Player myPlayer;
-	GameState myGState;
-	World myWorld;
+	static Player& GPlayer;
+	static World& GWorld;
 
 	int myCho;
 
@@ -25,6 +24,7 @@ public:
 	inline bool GetIsRunning() const { return this->myExecutionFlag; }
 
 private:
+	GameState myGState;
 	bool myExecutionFlag; //'TRUE' if game is running.
 };
 
