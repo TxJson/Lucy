@@ -4,29 +4,18 @@
 #include "pch.h"
 
 #define TOWNNAME "Rackford"
-
-enum TownPlaces
-{
-	TOWNSQUARE,
-	OPENDIMENSION,
-	SHOP
-};
-
 class Town
 {
 public:
 	Town();
 	~Town();
 
-	void Update();
-
-	TownPlaces myTownLocation;
+	void Run();
 
 private:
 	void Introduction();
 	void NotAvailable();
 	void Dimension();
-	void TownSquare();
 	void Shop();
 
 	bool myFirstT;

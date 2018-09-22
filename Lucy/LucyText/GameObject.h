@@ -1,8 +1,4 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
-
-#include "pch.h"
-
+#pragma once
 class GameObject
 {
 public:
@@ -22,4 +18,3 @@ public:
 		myHealth;
 };
 
-#endif
