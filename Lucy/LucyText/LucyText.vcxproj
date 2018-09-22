@@ -122,10 +122,10 @@
     <ClCompile Include="Town.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Documents\Github\Lucy\Lucy\Lucy\pch.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Dimension.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="Town.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

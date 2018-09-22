@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <list>
 #include <windows.h>
 #include <thread>
 #include <chrono>
@@ -19,21 +20,27 @@ inline void Sleep(int someTime)
 	std::this_thread::sleep_for(std::chrono::milliseconds(someTime));
 }
 
-inline void Print(const std::string someText, const int aColourCode = 15)
+inline void Print(const std::string &someText, const int &aColourCode = 15)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), aColourCode);
 	std::cout << someText << std::endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
 
-inline void Print(std::string &someText, const int aColourCode = 15)
+
+/*
+Must use PrintEnd afterwards or normal print.
+*/
+inline void PrintCon(const std::string &someText, const int &aColourCode = 15)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), aColourCode);
-	std::cout << someText << std::endl;
+	std::cout << someText;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
 
-inline int Randomize(int &aLowAmount, int &aHighAmount)
+
+
+inline int Randomize(const int &aLowAmount, const int &aHighAmount)
 {
 	return (rand() % aHighAmount + aLowAmount);
 }
@@ -72,7 +79,7 @@ Colour codes
 15  WHITE
 + 241 Others
 */
-inline void SetColour(const int aColourCode)
+inline void SetColour(const int &aColourCode)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), aColourCode);
 }
