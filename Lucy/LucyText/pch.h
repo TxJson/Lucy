@@ -42,7 +42,7 @@ inline void PrintCon(const std::string &someText, const int &aColourCode = 15)
 
 inline int Randomize(const int &aLowAmount, const int &aHighAmount)
 {
-	return (rand() % aHighAmount + aLowAmount);
+	return (aLowAmount + (rand() % aHighAmount));
 }
 
 inline int Convert(const std::string aConvertableString)

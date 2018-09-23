@@ -11,16 +11,23 @@ public:
 
 	void Run();
 	void Generate();
+	void Next(const int &aChoice);
 
 private:
+	bool myEmptyRoom;
 	int
+		myDoorLimit,
+		myRoomSize,
+		myCurrentRoom,
 		myDimensionLimit,
 		myDimensionLow,
 		myDimensionSize;
 
-	std::string myDoors[10];
-	int myDoorColour[10];
-
+	int myDoorAmount[25];
+	int myDoorColour[25][15];
+	int myCorrectDoor[25];
+	std::string myRooms[25][15];
+	std::string myChoToConvert;
 	std::string myDoorTypes[14] =
 	{
 		"Birch",
