@@ -23,13 +23,14 @@ private:
 		myDimensionLow,
 		myDimensionSize;
 
-	int myDoorAmount[25];
-	int myDoorColour[25][15];
-	int myCorrectDoor[25];
-	std::string myRooms[25][15];
+	int myDoorAmount[150];
+	int myDoorColour[150][150];
+	int myCorrectDoor[150];
+	std::string myRooms[150][150];
 	std::string myChoToConvert;
-	std::string myDoorTypes[14] =
+	std::string myDoorTypes[16] =
 	{
+		"Wooden",
 		"Birch",
 		"Beech",
 		"Mahogany",
@@ -43,7 +44,8 @@ private:
 		"Oak",
 		"Ash",
 		"Maple",
-		"Cherry"
+		"Cherry",
+		"Love"
 	};
 };
 

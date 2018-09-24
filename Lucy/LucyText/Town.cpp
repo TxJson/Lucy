@@ -1,11 +1,9 @@
 #include "Town.h"
 
-
 Town::Town()
 {
 	myFirstT = true;
 }
-
 
 Town::~Town()
 {
@@ -13,7 +11,7 @@ Town::~Town()
 
 void Town::Run()
 {
-	while (1) 
+	while (1)
 	{
 		Empty();
 		if (myFirstT)
@@ -29,7 +27,7 @@ void Town::Run()
 
 			std::getline(std::cin, myChoToConvert);
 
-			myCho = Convert(myChoToConvert);
+			myCho = ConvertInt(myChoToConvert);
 			switch (myCho)
 			{
 			case 1:
@@ -65,7 +63,7 @@ void Town::NotAvailable()
 
 void Town::OpenDimension()
 {
-	while (1) 
+	while (1)
 	{
 		Empty();
 		Print("You are about to open a dimension to another realm. \nAre you sure?", 12);
@@ -73,16 +71,13 @@ void Town::OpenDimension()
 		Print("[2] No");
 
 		std::getline(std::cin, myChoToConvert);
-		myCho = Convert(myChoToConvert);
+		myCho = ConvertInt(myChoToConvert);
 
-		if (myCho == 1) 
+		if (myCho == 1)
 		{
 			myDimension.Run();
 		}
-		else 
-		{
-			break;
-		}
+		break;
 	}
 }
 

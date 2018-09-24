@@ -6,8 +6,8 @@ Dimension::Dimension()
 {
 	myEmptyRoom = false;
 	myCurrentRoom = 0;
-	myDoorLimit = 15;
-	myDimensionLimit = 25;
+	myDoorLimit = 5;
+	myDimensionLimit = 8;
 	myDimensionLow = 3;
 }
 
@@ -22,6 +22,11 @@ void Dimension::Run()
 	while (1)
 	{
 		Empty();
+
+		if (myCurrentRoom >= myDimensionSize)
+		{
+			break;
+		}
 
 		//DebugValues-start
 		Print
@@ -57,13 +62,13 @@ void Dimension::Run()
 
 		std::getline(std::cin, myChoToConvert);
 
-		Next(Convert(myChoToConvert));
+		Next(ConvertInt(myChoToConvert));
 	}
 }
 
 void Dimension::Generate()
 {
-	myDimensionSize = (int)Randomize(3, 25);
+	myDimensionSize = (int)Randomize(myDimensionLow, myDimensionLimit);
 	for (size_t x = 0; x < myDimensionSize; x++)
 	{
 		myRoomSize = Randomize(myDimensionLow, myDoorLimit);
@@ -75,6 +80,7 @@ void Dimension::Generate()
 			myDoorColour[x][y] = (int)Randomize(1, 14);
 		}
 	}
+	myCurrentRoom = 0;
 }
 
 void Dimension::Next(const int &aChoice)

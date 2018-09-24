@@ -5,7 +5,6 @@ App::App()
 {
 }
 
-
 App::~App()
 {
 }
@@ -25,9 +24,9 @@ void App::Menu()
 
 		if (tempCho != "")
 		{
-			myCho = Convert(tempCho);
+			myCho = ConvertInt(tempCho);
 
-			if (myCho == 1) 
+			if (myCho == 1)
 			{
 				myTown.Run();
 			}

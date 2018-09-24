@@ -118,6 +118,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Dimension.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Town.cpp" />
   </ItemGroup>
@@ -126,6 +127,7 @@
     <ClInclude Include="Dimension.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Town.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -15,7 +15,7 @@ inline void Empty()
 }
 
 //Time in milliseconds
-inline void Sleep(int someTime)
+inline void Sleep(const int &someTime)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(someTime));
 }
@@ -27,7 +27,6 @@ inline void Print(const std::string &someText, const int &aColourCode = 15)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
 
-
 /*
 Must use PrintEnd afterwards or normal print.
 */
@@ -38,14 +37,12 @@ inline void PrintCon(const std::string &someText, const int &aColourCode = 15)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
 
-
-
 inline int Randomize(const int &aLowAmount, const int &aHighAmount)
 {
 	return (aLowAmount + (rand() % aHighAmount));
 }
 
-inline int Convert(const std::string aConvertableString)
+inline int ConvertInt(const std::string &aConvertableString)
 {
 	if (!aConvertableString.empty())
 	{
