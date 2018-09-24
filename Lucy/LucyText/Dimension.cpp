@@ -11,7 +11,6 @@ Dimension::Dimension()
 	myDimensionLow = 3;
 }
 
-
 Dimension::~Dimension()
 {
 }
@@ -20,7 +19,7 @@ void Dimension::Run()
 {
 	Generate();
 	int tempCount = 0;
-	while (1) 
+	while (1)
 	{
 		Empty();
 
@@ -33,9 +32,9 @@ void Dimension::Run()
 			"Correct Door: " + std::to_string(myCorrectDoor[myCurrentRoom]) + "\n"
 			, 14
 		);
-		//DebugValuesend
+		//DebugValues-end
 
-		if (!myEmptyRoom) 
+		if (!myEmptyRoom)
 		{
 			Print("Which door would you like to go through?\n", 13);
 			if (myCurrentRoom > 0)
@@ -50,7 +49,7 @@ void Dimension::Run()
 			}
 			tempCount = 0;
 		}
-		else 
+		else
 		{
 			Print("This room is empty.", 13);
 			Print("[0] Back");
@@ -64,7 +63,6 @@ void Dimension::Run()
 
 void Dimension::Generate()
 {
-	int tempSize;
 	myDimensionSize = (int)Randomize(3, 25);
 	for (size_t x = 0; x < myDimensionSize; x++)
 	{
@@ -73,22 +71,21 @@ void Dimension::Generate()
 		myDoorAmount[x] = myRoomSize;
 		for (size_t y = 0; y < myRoomSize; y++)
 		{
-			tempSize = (int)Randomize(0, 14);
-			myRooms[x][y] = myDoorTypes[tempSize] + " Door";
-			myDoorColour[x][y] = (int)Randomize(1, 15);
+			myRooms[x][y] = myDoorTypes[(int)Randomize(0, 14)] + " Door";
+			myDoorColour[x][y] = (int)Randomize(1, 14);
 		}
 	}
 }
 
 void Dimension::Next(const int &aChoice)
 {
-	if (aChoice == myCorrectDoor[myCurrentRoom] && !myEmptyRoom) 
+	if (aChoice == myCorrectDoor[myCurrentRoom] && !myEmptyRoom)
 	{
 		myCurrentRoom += 1;
 	}
-	else if (aChoice == 0 && myCurrentRoom != 0)
+	else if (aChoice == 0)
 	{
-		if (!myEmptyRoom) 
+		if (!myEmptyRoom && myCurrentRoom > 0)
 		{
 			myCurrentRoom -= 1;
 		}
@@ -97,7 +94,7 @@ void Dimension::Next(const int &aChoice)
 			myEmptyRoom = false;
 		}
 	}
-	else if (myCurrentRoom != 0 && aChoice <= myDoorAmount[myCurrentRoom] && aChoice > 0)
+	else if (aChoice <= myDoorAmount[myCurrentRoom] && aChoice > 0)
 	{
 		myEmptyRoom = true;
 	}

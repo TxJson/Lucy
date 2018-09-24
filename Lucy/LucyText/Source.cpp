@@ -1,9 +1,8 @@
 #include "App.h"
 
-
-int main() 
+int main()
 {
-	srand(time(NULL)); //Sets the random seed
+	srand((unsigned)time(NULL)); //Sets the random seed
 	App tempApp;
 	tempApp.Menu();
 	return 0;
