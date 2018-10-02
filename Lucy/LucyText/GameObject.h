@@ -11,15 +11,17 @@ public:
 
 	virtual void Update();
 
-	std::string myName;
-	bool myIsAlive;
+	std::string Name;
+	bool AliveFlag;
 	int
-		myLevel;
+		Level,
+		Gold;
 	float
-		myEncounterRate,
-		myDropRateChance;
-	int myDamage,
-		myHealth;
+		EncounterRate,
+		DropRateChance;
+	int 
+		Damage,
+		Health;
 };
 
 #endif

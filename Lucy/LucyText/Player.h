@@ -6,9 +6,12 @@
 class Player : public GameObject
 {
 public:
-	Player(std::string aName);
+	Player();
 	~Player();
 
 	void Update();
+
+private:
+	void CalculateGold();
 };
 #endif

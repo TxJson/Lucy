@@ -1,12 +1,13 @@
 #include "Player.h"
 #include "pch.h"
 
-Player::Player(std::string aName)
+Player::Player()
 {
-	myName = aName;
-	myHealth = 300;
-	myDamage = 10;
-	myLevel = 1;
+	Name = "Lucy";
+	Health = 300;
+	Damage = 10;
+	Level = 1;
+	Gold = 150;
 }
 
 Player::~Player()
@@ -15,11 +16,18 @@ Player::~Player()
 
 void Player::Update()
 {
+	CalculateGold();
 	Print
 	(
-		"Name: " + myName + "\n"
-		+ "Level: " + std::to_string(myLevel) + "\n"
-		+ "Health: " + std::to_string(myHealth) + "\n"
-		, 13
+		"Name: " + Name + "\n"
+		+ "Level: " + std::to_string(Level) + "\n"
+		+ "Health: " + std::to_string(Health) + "\n"
+		+ "Gold: " + std::to_string(Gold) + "\n"
+		, 5
 	);
+}
+
+void Player::CalculateGold()
+{
+	Gold = (Gold < 0) ? 0 : Gold;
 }

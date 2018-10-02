@@ -2,6 +2,7 @@
 #define DIMENSION_H
 
 #include "pch.h"
+#include "Player.h"
 
 class Dimension
 {
@@ -9,11 +10,13 @@ public:
 	Dimension();
 	~Dimension();
 
-	void Run();
+	void Run(Player &aPlayer);
 	void Generate();
 	void Next(const int &aChoice);
 
 private:
+	void Fight(const Player &aPlayer);
+
 	bool myEmptyRoom;
 	int
 		myDoorLimit,

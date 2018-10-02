@@ -1,7 +1,5 @@
 #include "Dimension.h"
 
-//TODO: Crashes when out of dimensional gates
-
 Dimension::Dimension()
 {
 	myEmptyRoom = false;
@@ -15,7 +13,7 @@ Dimension::~Dimension()
 {
 }
 
-void Dimension::Run()
+void Dimension::Run(Player &aPlayer)
 {
 	Generate();
 	int tempCount = 0;
@@ -27,6 +25,8 @@ void Dimension::Run()
 		{
 			break;
 		}
+
+		aPlayer.Update();
 
 		//DebugValues-start
 		Print
@@ -104,4 +104,9 @@ void Dimension::Next(const int &aChoice)
 	{
 		myEmptyRoom = true;
 	}
+}
+
+void Dimension::Fight(const Player &aPlayer)
+{
+	//TODO: Fighting mechanics
 }

@@ -3,14 +3,16 @@
 Town::Town()
 {
 	myFirstT = true;
+	myDimensionCost = 50;
 }
 
 Town::~Town()
 {
 }
 
-void Town::Run(Player aPlayer)
+void Town::Run(const Player aPlayer)
 {
+	myPlayer = aPlayer;
 	while (1)
 	{
 		Empty();
@@ -20,7 +22,7 @@ void Town::Run(Player aPlayer)
 		}
 		else
 		{
-			aPlayer.Update();
+			myPlayer.Update();
 
 			Print("Location: " TOWNNAME ", Town Square", 11);
 			Print("What would you like to do?");
@@ -37,6 +39,9 @@ void Town::Run(Player aPlayer)
 				break;
 			case 2:
 				OpenDimension();
+				break;
+			case 481:
+				myPlayer.Gold = 15000; //Cheat code for easier debugging.
 				break;
 			}
 		}
@@ -60,7 +65,7 @@ void Town::Introduction()
 void Town::NotAvailable()
 {
 	Print("That is currently unavailable.", 12);
-	Sleep(750);
+	Sleep(1000);
 }
 
 void Town::OpenDimension()
@@ -68,22 +73,42 @@ void Town::OpenDimension()
 	while (1)
 	{
 		Empty();
-		Print("You are about to open a dimension to another realm. \nAre you sure?", 12);
-		Print("[1] Yes");
-		Print("[2] No");
+		myPlayer.Update();
+		Print("Opening a dimension costs " + 
+			std::to_string(myDimensionCost) + 
+			" Gold. \nAre you sure you want to proceed?", 12);
+		Print("[1] Yes\n[2] No");
 
 		std::getline(std::cin, myChoToConvert);
 		myCho = ConvertInt(myChoToConvert);
 
 		if (myCho == 1)
 		{
-			myDimension.Run();
+			if (myPlayer.Gold >= myDimensionCost) 
+			{
+				myPlayer.Gold -= myDimensionCost;
+				myDimension.Run(myPlayer);
+			}
+			else 
+			{
+				NotEnoughMoney();
+				break;
+			}
 		}
-		break;
+		else if (myCho == 2) 
+		{
+			break;
+		}
 	}
 }
 
 void Town::Shop()
 {
 	NotAvailable();
+}
+
+void Town::NotEnoughMoney()
+{
+	Print("Not enough money.", 12);
+	Sleep(1000);
 }

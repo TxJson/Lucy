@@ -28,7 +28,7 @@ void App::Menu()
 
 			if (myCho == 1)
 			{
-				myTown.Run(Player("Lucy"));
+				myTown.Run(Player());
 			}
 			else if (myCho == 2)
 			{

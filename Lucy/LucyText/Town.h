@@ -12,17 +12,21 @@ public:
 	Town();
 	~Town();
 
-	void Run(Player aPlayer);
+	void Run(const Player aPlayer);
 
 private:
 	void Introduction();
 	void NotAvailable();
 	void OpenDimension();
 	void Shop();
+	void NotEnoughMoney();
 
 	bool myFirstT;
 	std::string myChoToConvert;
-	int myCho;
+	int
+		myCho,
+		myDimensionCost;
+	Player myPlayer;
 
 	Dimension myDimension;
 };
