@@ -2,6 +2,7 @@
 #define APP_H
 
 #include "Town.h"
+#include "Player.h"
 
 #define NAME "Lucy"
 #define VERSION 0.01
@@ -17,7 +18,6 @@ public:
 
 	void Menu();
 	int myCho;
-
 	Town myTown;
 };
 

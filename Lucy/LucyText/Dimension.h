@@ -23,10 +23,10 @@ private:
 		myDimensionLow,
 		myDimensionSize;
 
-	int myDoorAmount[150];
-	int myDoorColour[150][150];
-	int myCorrectDoor[150];
-	std::string myRooms[150][150];
+	int myDoorAmount[25];
+	int myDoorColour[25][25];
+	int myCorrectDoor[25];
+	std::string myRooms[25][25];
 	std::string myChoToConvert;
 	std::string myDoorTypes[16] =
 	{

@@ -9,7 +9,7 @@ Town::~Town()
 {
 }
 
-void Town::Run()
+void Town::Run(Player aPlayer)
 {
 	while (1)
 	{
@@ -20,6 +20,8 @@ void Town::Run()
 		}
 		else
 		{
+			aPlayer.Update();
+
 			Print("Location: " TOWNNAME ", Town Square", 11);
 			Print("What would you like to do?");
 			Print("[1] Shop");

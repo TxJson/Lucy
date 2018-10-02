@@ -3,6 +3,7 @@
 
 #include "pch.h"
 #include "Dimension.h"
+#include "Player.h"
 
 #define TOWNNAME "Rackford"
 class Town
@@ -11,7 +12,7 @@ public:
 	Town();
 	~Town();
 
-	void Run();
+	void Run(Player aPlayer);
 
 private:
 	void Introduction();
