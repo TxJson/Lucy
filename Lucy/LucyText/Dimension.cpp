@@ -1,4 +1,5 @@
 #include "Dimension.h"
+#include <vector>
 
 Dimension::Dimension()
 {

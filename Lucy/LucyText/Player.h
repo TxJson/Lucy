@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "GameObject.h"
+#include "Entity.h"
 
-class Player : public GameObject
+class Player : public Entity
 {
 public:
 	Player();

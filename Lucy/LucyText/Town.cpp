@@ -26,8 +26,7 @@ void Town::Run(const Player aPlayer)
 
 			Print("Location: " TOWNNAME ", Town Square", 11);
 			Print("What would you like to do?");
-			Print("[1] Shop");
-			Print("[2] Open a Dimension");
+			Print("[1] <Shop>\n[2] <Crafting Station>\n[3] <Open a Dimension>");
 
 			std::getline(std::cin, myChoToConvert);
 
@@ -38,6 +37,9 @@ void Town::Run(const Player aPlayer)
 				Shop();
 				break;
 			case 2:
+				NotAvailable();
+				break;
+			case 3:
 				OpenDimension();
 				break;
 			case 481:
@@ -74,8 +76,8 @@ void Town::OpenDimension()
 	{
 		Empty();
 		myPlayer.Update();
-		Print("Opening a dimension costs " + 
-			std::to_string(myDimensionCost) + 
+		Print("Opening a dimension costs " +
+			std::to_string(myDimensionCost) +
 			" Gold. \nAre you sure you want to proceed?", 12);
 		Print("[1] Yes\n[2] No");
 
@@ -84,18 +86,18 @@ void Town::OpenDimension()
 
 		if (myCho == 1)
 		{
-			if (myPlayer.Gold >= myDimensionCost) 
+			if (myPlayer.Gold >= myDimensionCost)
 			{
 				myPlayer.Gold -= myDimensionCost;
 				myDimension.Run(myPlayer);
 			}
-			else 
+			else
 			{
 				NotEnoughMoney();
-				break;
 			}
+			break;
 		}
-		else if (myCho == 2) 
+		else if (myCho == 2)
 		{
 			break;
 		}

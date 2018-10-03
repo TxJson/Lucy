@@ -1,13 +1,13 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include "pch.h"
 
-class GameObject
+class Entity
 {
 public:
-	GameObject();
-	virtual ~GameObject();
+	Entity();
+	virtual ~Entity();
 
 	virtual void Update();
 
@@ -19,7 +19,7 @@ public:
 	float
 		EncounterRate,
 		DropRateChance;
-	int 
+	int
 		Damage,
 		Health;
 };

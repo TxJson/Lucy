@@ -16,8 +16,7 @@ void App::Menu()
 		Empty();
 		Print("GAME: " NAME, 12);
 		Print("Author: " AUTHOR "\n", 12);
-		Print("[1] Start");
-		Print("[2] Exit \n");
+		Print("[1] <Start>\n[2] <Exit>\n");
 
 		std::string tempCho;
 		std::getline(std::cin, tempCho);
