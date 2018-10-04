@@ -3,6 +3,7 @@
 
 #include "pch.h"
 #include "Player.h"
+#include "EnemyManager.h"
 
 class Dimension
 {
@@ -15,7 +16,7 @@ public:
 	void Next(const int &aChoice);
 
 private:
-	void Fight(const Player &aPlayer);
+	void Fight(Player &aPlayer);
 
 	bool myEmptyRoom;
 	int
@@ -24,7 +25,10 @@ private:
 		myCurrentRoom,
 		myDimensionLimit,
 		myDimensionLow,
-		myDimensionSize;
+		myDimensionSize,
+		myEnemyAmount;
+
+	EnemyManager myEnemyManager;
 
 	int myDoorAmount[25];
 	int myDoorColour[25][25];

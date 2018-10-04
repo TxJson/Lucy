@@ -8,6 +8,8 @@ Player::Player()
 	Damage = 10;
 	Level = 1;
 	Gold = 150;
+	Abilities[0] = "Hit";
+	Abilities[1] = "Kick";
 }
 
 Player::~Player()

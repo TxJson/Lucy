@@ -57,6 +57,7 @@ void Dimension::Run(Player &aPlayer)
 		}
 		else
 		{
+			Fight(aPlayer);
 			Print("This room is empty.", 13);
 			Print("[0] Back");
 		}
@@ -107,7 +108,33 @@ void Dimension::Next(const int &aChoice)
 	}
 }
 
-void Dimension::Fight(const Player &aPlayer)
+void Dimension::Fight(Player &aPlayer)
 {
 	//TODO: Fighting mechanics
+
+	std::vector<Entity> tempEnemies;
+	myEnemyAmount = Randomize(1, 8);
+
+	for (size_t i = 0; i < myEnemyAmount; i++)
+	{
+		tempEnemies.push_back(myEnemyManager.GetEnemy());
+	}
+
+	while (1) 
+	{
+		Empty();
+		aPlayer.Update();
+
+		Print("Enemies: ", 12);
+		for (size_t i = 0; i < tempEnemies.size(); i++)
+		{
+			Print(tempEnemies[i].Name);
+		}
+
+		Print("\nAbilities: ", 10);
+
+		std::getline(std::cin, myChoToConvert);
+
+		Next(ConvertInt(myChoToConvert));
+	}
 }

@@ -17,11 +17,13 @@ public:
 		Level,
 		Gold;
 	float
-		EncounterRate,
 		DropRateChance;
 	int
-		Damage,
-		Health;
+		Health,
+		Damage;
+
+	std::string Abilities[2];
+
 };
 
 #endif
