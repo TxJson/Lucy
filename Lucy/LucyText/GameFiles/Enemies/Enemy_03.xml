@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lucy>
+	<Enemy>
+		<Name> Brute </Name>
+		<Id> 3 </Id>
+		<Health> 500 </Health>
+		<Damage> 15 </Damage>
+		<DropRate> 0.40 </DropRate>
+		<Abilities>
+			<A0> Slam </A0>
+			<A1> Crumble </A1>
+		</Abilities>
+	</Enemy>
+</Lucy>

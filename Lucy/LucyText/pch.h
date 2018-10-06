@@ -42,7 +42,7 @@ inline int Randomize(const int &aLowAmount, const int &aHighAmount)
 	return (aLowAmount + (rand() % aHighAmount));
 }
 
-inline int ConvertInt(const std::string &aConvertableString)
+inline int ConvertToInt(const std::string &aConvertableString)
 {
 	if (!aConvertableString.empty())
 	{

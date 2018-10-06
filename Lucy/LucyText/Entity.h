@@ -20,7 +20,8 @@ public:
 		DropRateChance;
 	int
 		Health,
-		Damage;
+		Damage,
+		ID;
 
 	std::string Abilities[2];
 

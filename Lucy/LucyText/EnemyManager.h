@@ -2,6 +2,7 @@
 #define ENEMYMANAGER_H
 
 #include "Entity.h"
+#include <vector>
 
 enum Enemy
 {
@@ -18,7 +19,11 @@ public:
 
 	Entity GetEnemy();
 
+private:
 	int myEnemyID;
+	std::vector<std::string> myFiles;
+	std::vector<Entity> myEnemies;
+	std::string myPath = "GameFiles/Enemies";
 };
 
 #endif

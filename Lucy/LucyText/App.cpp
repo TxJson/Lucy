@@ -23,7 +23,7 @@ void App::Menu()
 
 		if (tempCho != "")
 		{
-			myCho = ConvertInt(tempCho);
+			myCho = ConvertToInt(tempCho);
 
 			if (myCho == 1)
 			{

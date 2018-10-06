@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Enemies">
-      <UniqueIdentifier>{5fd66b7f-5796-4c4c-87ce-e1f2228d90ba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Enemies">
-      <UniqueIdentifier>{da9a4972-9752-4729-acc2-78f6fcd7781a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -42,14 +36,8 @@
     <ClCompile Include="EnemyManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FireWitch.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="IceWitch.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="BloodWitch.cpp">
-      <Filter>Source Files\Enemies</Filter>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,14 +62,11 @@
     <ClInclude Include="EnemyManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FireWitch.h">
-      <Filter>Header Files\Enemies</Filter>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IceWitch.h">
-      <Filter>Header Files\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="BloodWitch.h">
-      <Filter>Header Files\Enemies</Filter>
+    <ClInclude Include="File.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

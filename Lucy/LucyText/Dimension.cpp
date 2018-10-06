@@ -17,7 +17,6 @@ Dimension::~Dimension()
 void Dimension::Run(Player &aPlayer)
 {
 	Generate();
-	int tempCount = 0;
 	while (1)
 	{
 		Empty();
@@ -49,11 +48,9 @@ void Dimension::Run(Player &aPlayer)
 			}
 			for (size_t i = 0; i < myDoorAmount[myCurrentRoom]; i++)
 			{
-				tempCount++;
-				PrintCon("[" + std::to_string(tempCount), myDoorColour[myCurrentRoom][i]);
+				PrintCon("[" + std::to_string(i+1), myDoorColour[myCurrentRoom][i]);
 				Print("] " + myRooms[myCurrentRoom][i], myDoorColour[myCurrentRoom][i]);
 			}
-			tempCount = 0;
 		}
 		else
 		{
@@ -64,7 +61,7 @@ void Dimension::Run(Player &aPlayer)
 
 		std::getline(std::cin, myChoToConvert);
 
-		Next(ConvertInt(myChoToConvert));
+		Next(ConvertToInt(myChoToConvert));
 	}
 }
 
@@ -113,11 +110,12 @@ void Dimension::Fight(Player &aPlayer)
 	//TODO: Fighting mechanics
 
 	std::vector<Entity> tempEnemies;
-	myEnemyAmount = Randomize(1, 8);
+	myEnemyAmount = Randomize(5, 10);
 
 	for (size_t i = 0; i < myEnemyAmount; i++)
 	{
 		tempEnemies.push_back(myEnemyManager.GetEnemy());
+		Sleep(10);
 	}
 
 	while (1) 
@@ -126,15 +124,19 @@ void Dimension::Fight(Player &aPlayer)
 		aPlayer.Update();
 
 		Print("Enemies: ", 12);
-		for (size_t i = 0; i < tempEnemies.size(); i++)
+		for (size_t i = 0; i < myEnemyAmount; i++)
 		{
-			Print(tempEnemies[i].Name);
+			PrintCon(tempEnemies[i].Name);
+			Print(" > HP: " + std::to_string(tempEnemies[i].Health), 12);
 		}
 
-		Print("\nAbilities: ", 10);
+		//TODO: Calling player abilities uses TOO MUCH memory. Needs to be fixed ASAP.
+		//Print("\nAbilities: ", 10);
+		//for (size_t i = 0; i < aPlayer.Abilities->length(); i++)
+		//{
+		//	Print("[" + std::to_string(i + 1) + "] " + aPlayer.Abilities[i]);
+		//}
 
 		std::getline(std::cin, myChoToConvert);
-
-		Next(ConvertInt(myChoToConvert));
 	}
 }

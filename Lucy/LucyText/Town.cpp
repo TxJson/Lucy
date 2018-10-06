@@ -30,7 +30,7 @@ void Town::Run(const Player aPlayer)
 
 			std::getline(std::cin, myChoToConvert);
 
-			myCho = ConvertInt(myChoToConvert);
+			myCho = ConvertToInt(myChoToConvert);
 			switch (myCho)
 			{
 			case 1:
@@ -82,7 +82,7 @@ void Town::OpenDimension()
 		Print("[1] Yes\n[2] No");
 
 		std::getline(std::cin, myChoToConvert);
-		myCho = ConvertInt(myChoToConvert);
+		myCho = ConvertToInt(myChoToConvert);
 
 		if (myCho == 1)
 		{

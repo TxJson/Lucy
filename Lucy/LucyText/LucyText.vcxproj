@@ -116,24 +116,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="BloodWitch.cpp" />
-    <ClCompile Include="FireWitch.cpp" />
     <ClCompile Include="Dimension.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="IceWitch.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Town.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
-    <ClInclude Include="BloodWitch.h" />
-    <ClInclude Include="FireWitch.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="Dimension.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="IceWitch.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Town.h" />

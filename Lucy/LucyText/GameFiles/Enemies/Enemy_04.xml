@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lucy>
+	<Enemy>
+		<Name> Spirit </Name>
+		<Id> 4 </Id>
+		<Health> 235 </Health>
+		<Damage> 35 </Damage>
+		<DropRate> 1 </DropRate>
+		<Abilities>
+			<A0> Haunt </A0>
+			<A1> Spook </A1>
+		</Abilities>
+	</Enemy>
+</Lucy>
