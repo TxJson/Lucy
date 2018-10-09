@@ -27,7 +27,10 @@ void App::Menu()
 
 			if (myCho == 1)
 			{
-				myTown.Run(Player());
+				Player *tempPlayer = new Player();
+				myTown.Run(*tempPlayer);
+				delete(tempPlayer);
+				tempPlayer = NULL;
 			}
 			else if (myCho == 2)
 			{

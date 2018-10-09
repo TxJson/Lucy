@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lucy>
+	<Enemy>
+		<Name> Sword </Name>
+		<Id> 0 </Id>
+		<Damage> 15 </Damage>
+		<Craftable> true </Craftable>
+		<Enchantable> true </Enchantable>
+	</Enemy>
+</Lucy>

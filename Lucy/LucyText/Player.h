@@ -9,6 +9,7 @@ public:
 	Player();
 	~Player();
 
+	int myHealthLimit;
 	void Update();
 
 private:

@@ -8,7 +8,9 @@
 		<DropRate> 0.25 </DropRate>
 		<Abilities>
 			<A0> Drain </A0>
+				<A0_Damage> 10 </A0_Damage>
 			<A1> Drown </A1>
+				<A1_Damage> 15 </A1_Damage>
 		</Abilities>
 	</Enemy>
 </Lucy>

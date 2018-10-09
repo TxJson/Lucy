@@ -16,6 +16,7 @@ void Town::Run(const Player aPlayer)
 	while (1)
 	{
 		Empty();
+
 		if (myFirstT)
 		{
 			Introduction();

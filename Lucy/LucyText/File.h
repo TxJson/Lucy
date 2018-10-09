@@ -8,21 +8,20 @@
 #include <vector>
 #include <filesystem>
 
-
 inline std::string GetFromXml(const std::string &aPath, const std::string &aFindLine)
 {
 	std::string tempLine; //The line to return
 	std::ifstream tempIn(aPath);
-	while (std::getline(tempIn, tempLine)) 
+	while (std::getline(tempIn, tempLine))
 	{
-		int tempFind = tempLine.find(aFindLine);
-		if (tempFind != std::string::npos) 
+		int tempFind = (int)tempLine.find(aFindLine);
+		if (tempFind != std::string::npos)
 		{
 			tempFind = -1;
-			do 
+			do
 			{
-				tempFind = tempLine.find(aFindLine, tempFind + 1);
-				if (tempFind != -1) 
+				tempFind = (int)tempLine.find(aFindLine, tempFind + 1);
+				if (tempFind != -1)
 				{
 					//Removes the specified string to get what is in between.
 					tempLine = tempLine.substr(0, tempFind) + tempLine.substr(tempFind + aFindLine.length());
@@ -46,7 +45,5 @@ inline std::vector<std::string> GetFiles(const std::string &aPath)
 
 	return tempFiles;
 }
-
-
 
 #endif

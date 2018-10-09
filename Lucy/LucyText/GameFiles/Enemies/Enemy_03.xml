@@ -8,7 +8,9 @@
 		<DropRate> 0.40 </DropRate>
 		<Abilities>
 			<A0> Slam </A0>
+				<A0_Damage> 10 </A0_Damage>
 			<A1> Crumble </A1>
+				<A1_Damage> 20 </A1_Damage>
 		</Abilities>
 	</Enemy>
 </Lucy>

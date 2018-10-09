@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Lucy>
 	<Enemy>
-		<Name> Wizard </Name>
-		<Id> 1 </Id>
-		<Health> 265 </Health>
-		<Damage> 10 </Damage>
+		<Name> Wolf </Name>
+		<Id> 5 </Id>
+		<Health> 275 </Health>
+		<Damage> 15 </Damage>
 		<DropRate> 0.75 </DropRate>
 		<Abilities>
-			<A0> Implosion </A0>
+			<A0> Bite </A0>
 				<A0_Damage> 25 </A0_Damage>
-			<A1> Beam </A1>
-				<A1_Damage> 15 </A1_Damage>
+			<A1> Claw </A1>
+				<A1_Damage> 5 </A1_Damage>
 		</Abilities>
 	</Enemy>
 </Lucy>

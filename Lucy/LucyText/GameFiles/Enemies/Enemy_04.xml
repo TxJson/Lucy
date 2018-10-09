@@ -8,7 +8,9 @@
 		<DropRate> 1 </DropRate>
 		<Abilities>
 			<A0> Haunt </A0>
+				<A0_Damage> 10 </A0_Damage>
 			<A1> Spook </A1>
+				<A1_Damage> 20 </A1_Damage>
 		</Abilities>
 	</Enemy>
 </Lucy>

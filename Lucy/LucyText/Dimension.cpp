@@ -21,6 +21,11 @@ void Dimension::Run(Player &aPlayer)
 	{
 		Empty();
 
+		if (!aPlayer.AliveFlag)
+		{
+			break;
+		}
+
 		if (myCurrentRoom >= myDimensionSize)
 		{
 			break;
@@ -48,13 +53,17 @@ void Dimension::Run(Player &aPlayer)
 			}
 			for (size_t i = 0; i < myDoorAmount[myCurrentRoom]; i++)
 			{
-				PrintCon("[" + std::to_string(i+1), myDoorColour[myCurrentRoom][i]);
+				PrintCon("[" + std::to_string(i + 1), myDoorColour[myCurrentRoom][i]);
 				Print("] " + myRooms[myCurrentRoom][i], myDoorColour[myCurrentRoom][i]);
 			}
 		}
 		else
 		{
 			Fight(aPlayer);
+			if (!aPlayer.AliveFlag)
+			{
+				break;
+			}
 			Print("This room is empty.", 13);
 			Print("[0] Back");
 		}
@@ -110,7 +119,11 @@ void Dimension::Fight(Player &aPlayer)
 	//TODO: Fighting mechanics
 
 	std::vector<Entity> tempEnemies;
-	myEnemyAmount = Randomize(5, 10);
+	myEnemyAmount = Randomize(4, 8);
+	int tempCho,
+		tempLootAmount = 5,
+		tempTakeDamage,
+		tempDealDamage;
 
 	for (size_t i = 0; i < myEnemyAmount; i++)
 	{
@@ -118,25 +131,77 @@ void Dimension::Fight(Player &aPlayer)
 		Sleep(10);
 	}
 
-	while (1) 
+	while (1)
 	{
+		tempCho = 0;
 		Empty();
+
+		if (tempEnemies.empty())
+		{
+			Print("All enemies are dead!", 10);
+			Sleep(1000);
+			break;
+		}
+
 		aPlayer.Update();
 
 		Print("Enemies: ", 12);
 		for (size_t i = 0; i < myEnemyAmount; i++)
 		{
-			PrintCon(tempEnemies[i].Name);
-			Print(" > HP: " + std::to_string(tempEnemies[i].Health), 12);
+			PrintCon(tempEnemies[i].GetName());
+			Print(" > HP: " + std::to_string(tempEnemies[i].GetHealth()), 12);
 		}
 
-		//TODO: Calling player abilities uses TOO MUCH memory. Needs to be fixed ASAP.
-		//Print("\nAbilities: ", 10);
-		//for (size_t i = 0; i < aPlayer.Abilities->length(); i++)
-		//{
-		//	Print("[" + std::to_string(i + 1) + "] " + aPlayer.Abilities[i]);
-		//}
+		Print("\nAbilities: ", 10);
+		for (size_t i = 0; i < 2; i++)
+		{
+			PrintCon("[" + std::to_string(i + 1) + "] " + aPlayer.Abilities[i].Name);
+			Print(" | Damage: " + std::to_string(aPlayer.GetDamage() + aPlayer.Abilities[i].Damage));
+		}
 
 		std::getline(std::cin, myChoToConvert);
+		tempCho = ConvertToInt(myChoToConvert);
+		Empty();
+		for (size_t i = 0; i < tempEnemies.size(); i++)
+		{
+			Sleep(250);
+			if (tempCho > 0 && tempCho < 3)
+			{
+				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.Abilities[tempCho - 1].Damage) / (aPlayer.GetLevel() * 2) * 20); //Calculated player damage.
+				Print("You dealt " + std::to_string(tempDealDamage) + " damage to the " + tempEnemies[i].GetName(), 11);
+				tempEnemies[i].SetHealth(-tempDealDamage);
+				if (tempEnemies[i].GetHealth() <= 0)
+				{
+					Sleep(150);
+					Print(tempEnemies[i].Name + " died. Gained " + std::to_string(tempLootAmount) + " Gold", 10);
+					aPlayer.SetGold(tempLootAmount);
+					//FIX: Crashes when many enemies die.
+					tempEnemies.erase(tempEnemies.begin() + i); //Removes the dead enemy from the vector list.
+					//TODO: Add item drops.
+				}
+				else
+				{
+					Sleep(500);
+					tempTakeDamage = ((tempEnemies[i].GetDamage() / aPlayer.GetResistance()) / (aPlayer.GetLevel() * 2));
+					Print("You received " + std::to_string(tempTakeDamage) + " damage from the " + tempEnemies[i].GetName(), 12);
+					aPlayer.SetHealth(-tempTakeDamage);
+				}
+			}
+
+			if (!aPlayer.AliveFlag)
+			{
+				break;
+			}
+		}
+
+		if (aPlayer.Health <= 0)
+		{
+			Sleep(750);
+			Print("\n\nYOU DIED!", 12);
+			aPlayer.AliveFlag = false;
+			Print("Press 'ENTER' to continue.");
+			std::getline(std::cin, myChoToConvert);
+			break;
+		}
 	}
 }
