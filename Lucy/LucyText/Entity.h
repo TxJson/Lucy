@@ -9,6 +9,14 @@ struct Ability
 	int Damage;
 };
 
+enum ItemTypes
+{
+	WEAPON,
+	ARMOR,
+	SCROLL,
+	CONSUMABLE
+};
+
 class Entity
 {
 public:
@@ -24,8 +32,13 @@ public:
 	virtual const int& GetResistance() const { return Resistance; } //Gets Resistance
 	virtual const int& GetID() const { return ID; } //Gets ID
 	virtual const int& GetLevel() const { return Level; }
+	virtual const int& GetProtectionMultiplier() const { return ProtectionMultiplier; }
+	virtual const int& GetDamageMultiplier() const { return DamageMultiplier; }
+	virtual const int& GetHealingConstant() const { return HealingConstant; }
+	virtual const int& GetCost() const { return Cost; }
 	virtual const std::string& GetName() const { return Name; } //Gets Name
 	virtual const float& GetDropRate() const { return DropRateChance; } //Gets Droprate
+	virtual const ItemTypes& GetItemType() const { return ItemType; }
 
 	std::string Name;
 	bool AliveFlag;
@@ -39,8 +52,15 @@ public:
 		Health,
 		HealthMax,
 		Damage,
-		ID;
+		ID,
+		HealthMultiplier,
+		DamageMultiplier,
+		ProtectionMultiplier,
+		HealingConstant,
+		Cost;
+	bool Enchantable;
 
+	ItemTypes ItemType;
 	Ability Abilities[2];
 };
 

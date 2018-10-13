@@ -35,12 +35,16 @@ inline std::string GetFromXml(const std::string &aPath, const std::string &aFind
 	return tempLine;
 }
 
-inline std::vector<std::string> GetFiles(const std::string &aPath)
+inline std::vector<std::string> GetXmlFiles(const std::string &aPath)
 {
 	std::vector<std::string> tempFiles;
 	for (auto & files : std::experimental::filesystem::v1::directory_iterator(aPath))
 	{
-		tempFiles.push_back(files.path().string());
+		int tempFind = (int)files.path().string().find(".xml");
+		if (tempFind != std::string::npos)
+		{
+			tempFiles.push_back(files.path().string());
+		}
 	}
 
 	return tempFiles;

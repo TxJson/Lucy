@@ -4,6 +4,8 @@
 #include "pch.h"
 #include "Dimension.h"
 #include "Player.h"
+#include "ItemManager.h"
+#include "Entity.h"
 
 #define TOWNNAME "Rackford"
 class Town
@@ -27,7 +29,8 @@ private:
 		myCho,
 		myDimensionCost;
 	Player myPlayer;
-
+	ItemManager myItemManager;
+	std::vector<Entity> myItems;
 	Dimension myDimension;
 };
 

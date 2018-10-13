@@ -4,13 +4,6 @@
 #include "Entity.h"
 #include <vector>
 
-enum Enemy
-{
-	FIREWITCH,
-	ICEWITCH,
-	BLOODWITCH
-};
-
 class EnemyManager
 {
 public:

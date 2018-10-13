@@ -1,5 +1,5 @@
 #include "Dimension.h"
-#include <vector>
+#include "Calculate.h"
 
 Dimension::Dimension()
 {
@@ -60,6 +60,7 @@ void Dimension::Run(Player &aPlayer)
 		else
 		{
 			Fight(aPlayer);
+			Empty();
 			if (!aPlayer.AliveFlag)
 			{
 				break;
@@ -123,7 +124,8 @@ void Dimension::Fight(Player &aPlayer)
 	int tempCho,
 		tempLootAmount = 5,
 		tempTakeDamage,
-		tempDealDamage;
+		tempDealDamage,
+		tempAbilityID;
 
 	for (size_t i = 0; i < myEnemyAmount; i++)
 	{
@@ -138,8 +140,11 @@ void Dimension::Fight(Player &aPlayer)
 
 		if (tempEnemies.empty())
 		{
-			Print("All enemies are dead!", 10);
-			Sleep(1000);
+			Print("All enemies are dead, you gained 50 Gold.", 10);
+			aPlayer.SetGold(50);
+
+			Print("Press 'ENTER' to continue.");
+			std::getline(std::cin, myChoToConvert);
 			break;
 		}
 
@@ -156,7 +161,7 @@ void Dimension::Fight(Player &aPlayer)
 		for (size_t i = 0; i < 2; i++)
 		{
 			PrintCon("[" + std::to_string(i + 1) + "] " + aPlayer.Abilities[i].Name);
-			Print(" | Damage: " + std::to_string(aPlayer.GetDamage() + aPlayer.Abilities[i].Damage));
+			Print(" | Damage: " + std::to_string(((aPlayer.GetDamage() + aPlayer.Abilities[i].Damage) / (aPlayer.GetLevel() * 2))));
 		}
 
 		std::getline(std::cin, myChoToConvert);
@@ -164,26 +169,27 @@ void Dimension::Fight(Player &aPlayer)
 		Empty();
 		for (size_t i = 0; i < tempEnemies.size(); i++)
 		{
-			Sleep(250);
+			Sleep(500);
 			if (tempCho > 0 && tempCho < 3)
 			{
-				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.Abilities[tempCho - 1].Damage) / (aPlayer.GetLevel() * 2) * 20); //Calculated player damage.
+				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.Abilities[tempCho - 1].Damage) / (aPlayer.GetLevel() * 2)); //Calculated player damage.
 				Print("You dealt " + std::to_string(tempDealDamage) + " damage to the " + tempEnemies[i].GetName(), 11);
-				tempEnemies[i].SetHealth(-tempDealDamage);
-				if (tempEnemies[i].GetHealth() <= 0)
+				tempEnemies[i].SetHealth(-tempDealDamage);			
+
+				Sleep(500);
+				if (tempEnemies[i].GetHealth() <= 0) 
 				{
-					Sleep(150);
 					Print(tempEnemies[i].Name + " died. Gained " + std::to_string(tempLootAmount) + " Gold", 10);
 					aPlayer.SetGold(tempLootAmount);
-					//FIX: Crashes when many enemies die.
-					tempEnemies.erase(tempEnemies.begin() + i); //Removes the dead enemy from the vector list.
-					//TODO: Add item drops.
+					tempEnemies[i].AliveFlag = false;
+					myEnemyAmount--;
 				}
 				else
 				{
-					Sleep(500);
-					tempTakeDamage = ((tempEnemies[i].GetDamage() / aPlayer.GetResistance()) / (aPlayer.GetLevel() * 2));
-					Print("You received " + std::to_string(tempTakeDamage) + " damage from the " + tempEnemies[i].GetName(), 12);
+
+					tempAbilityID = Randomize(0, 1);
+					tempTakeDamage = (((tempEnemies[i].GetDamage() + tempEnemies[i].Abilities[tempAbilityID].Damage) / aPlayer.GetResistance()) / (aPlayer.GetLevel() * 2));
+					Print(tempEnemies[i].GetName() + " used " + tempEnemies[i].Abilities[tempAbilityID].Name + " and you took " + std::to_string(tempTakeDamage) + " damage.", 12);
 					aPlayer.SetHealth(-tempTakeDamage);
 				}
 			}
@@ -194,13 +200,14 @@ void Dimension::Fight(Player &aPlayer)
 			}
 		}
 
+		tempEnemies = EraseIfDead(tempEnemies);
+		tempEnemies.resize(myEnemyAmount);
+
 		if (aPlayer.Health <= 0)
 		{
 			Sleep(750);
 			Print("\n\nYOU DIED!", 12);
 			aPlayer.AliveFlag = false;
-			Print("Press 'ENTER' to continue.");
-			std::getline(std::cin, myChoToConvert);
 			break;
 		}
 	}

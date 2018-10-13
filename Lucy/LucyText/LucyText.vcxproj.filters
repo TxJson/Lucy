@@ -62,10 +62,13 @@
     <ClInclude Include="EnemyManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="ItemManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="File.h">
+    <ClInclude Include="Calculate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

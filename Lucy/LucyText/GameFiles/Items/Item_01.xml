@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lucy>
+	<Item>
+		<Name> Healing Pot </Name>
+		<Id> 1 </Id>
+		<Type> 3 </Type>
+		<Abilities>
+			<A0> None </A0>
+				<A0_Damage> 0 </A0_Damage>
+			<A1> None </A1>
+				<A1_Damage> 0 </A1_Damage>
+		<Abilities>
+		<DamageMultiplier> 0 </DamageMultiplier>
+		<ProtectionMultiplier> 0 </ProtectionMultiplier>
+		<HealthMultiplier> 0 </HealthMultiplier>
+		<HealingConstant> 250 </HealingConstant>
+		<Enchantable> 0 </Enchantable>
+		<Cost> 10 </Cost>
+	</Item>
+</Lucy>
