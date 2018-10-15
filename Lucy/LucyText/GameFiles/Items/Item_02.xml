@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lucy>
+	<Item>
+		<Name> Cheese Grater </Name>
+		<Id> 2 </Id>
+		<Type> 0 </Type>
+		<Abilities>
+			<A0> Grate </A0>
+				<A0_Damage> 40 </A0_Damage>
+			<A1> Double-Grate </A1>
+				<A1_Damage> 4000 </A1_Damage>
+		<Abilities>
+		<DamageMultiplier> 5 </DamageMultiplier>
+		<ProtectionMultiplier> 0 </ProtectionMultiplier>
+		<HealthMultiplier> 0 </HealthMultiplier>
+		<HealingConstant> 200 </HealingConstant>
+		<Enchantable> 1 </Enchantable>
+		<Cost> 550 </Cost>
+	</Item>
+</Lucy>

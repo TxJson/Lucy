@@ -2,7 +2,7 @@
 #include "pch.h"
 #include "Calculate.h"
 
-#define INVENTORYLIMIT myCho <= myInventory.size() && myCho >= 0
+#define INVENTORYLIMIT myCho <= myInventory.size()-1 && myCho >= 0
 
 Player::Player()
 {
@@ -33,24 +33,29 @@ void Player::Update()
 		+ "Level: " + std::to_string(Level) + "\n"
 		+ "Health: " + std::to_string(Health) + "\n"
 		+ "Gold: " + std::to_string(Gold) + "\n"
-		, 5
+		, Colour::MAGENTA
 	);
 }
 
 void Player::Inventory()
 {
-	while (1) 
+	while (1)
 	{
 		Empty();
 		Update();
 
-		PrintInventory();
-		Print("\n[1] <Inspect Item> | [2] <Throw Away Item> | [3] <Use Item> | [4] <Back>");
+		Print("INVENTORY: ", 11);
+		for (size_t i = 0; i < myInventory.size(); i++)
+		{
+			Print(myInventory[i].GetName());
+		}
+		Print("\n");
+		Print("\n[1] <Inspect Item> \n[2] <Throw Away Item> \n[3] <Use Item> \n[4] <Back>");
 		std::getline(std::cin, myChoToConvert);
 
 		myCho = ConvertToInt(myChoToConvert);
 
-		if (myCho == 1 && myInventory.size() > 0) 
+		if (myCho == 1 && myInventory.size() > 0)
 		{
 			Empty();
 			Update();
@@ -60,9 +65,9 @@ void Player::Inventory()
 
 			myCho = ConvertToInt(myChoToConvert);
 
-			if (INVENTORYLIMIT) 
+			if (INVENTORYLIMIT)
 			{
-				while (1) 
+				while (1)
 				{
 					Empty();
 					Print
@@ -74,7 +79,7 @@ void Player::Inventory()
 					for (size_t i = 0; i < 2; i++)
 					{
 						PrintCon("Ability " + std::to_string(i + 1) + ": " + myInventory[myCho].Abilities[i].Name);
-						Print(" > " + std::to_string(myInventory[myCho].Abilities[i].Damage) + " Damage", 12);
+						Print(" > " + std::to_string(myInventory[myCho].Abilities[i].Damage) + " Damage", Colour::LIGHTRED);
 					}
 
 					Print("\n\nPress 'ENTER' to go back.");
@@ -83,7 +88,7 @@ void Player::Inventory()
 				}
 			}
 		}
-		else if (myCho == 2) 
+		else if (myCho == 2)
 		{
 			Empty();
 			Print("Which item would you like to remove?\n");
@@ -102,7 +107,7 @@ void Player::Inventory()
 				myInventory = EraseIfDead(myInventory);
 			}
 		}
-		else if (myCho == 3) 
+		else if (myCho == 3)
 		{
 			Empty();
 			Print("Which item would you like to use?\n");
@@ -111,23 +116,23 @@ void Player::Inventory()
 			std::getline(std::cin, myChoToConvert);
 
 			myCho = ConvertToInt(myChoToConvert);
-			if (INVENTORYLIMIT) 
+			if (INVENTORYLIMIT)
 			{
 				Empty();
-				if (myInventory[myCho].GetItemType() == ItemTypes::CONSUMABLE) 
+				if (myInventory[myCho].GetItemType() == ItemTypes::CONSUMABLE)
 				{
-					Print("You used a " + myInventory[myCho].GetName() + ". \n +"+std::to_string(myInventory[myCho].GetHealingConstant())+"HP", 10);
+					Print("You used a " + myInventory[myCho].GetName() + ". \n +" + std::to_string(myInventory[myCho].GetHealingConstant()) + "HP", Colour::LIGHTGREEN);
 					SetHealth(myInventory[myCho].GetHealingConstant());
 					Sleep(1000);
 				}
-				else 
+				else
 				{
-					Print("You can't use that item.", 12);
+					Print("You can't use that item.", Colour::LIGHTRED);
 					Sleep(1000);
 				}
 			}
 		}
-		else if (myCho == 4) 
+		else if (myCho == 4)
 		{
 			break;
 		}
@@ -154,4 +159,3 @@ void Player::PrintInventory()
 	}
 	Print("\n");
 }
-

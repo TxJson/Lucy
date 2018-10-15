@@ -14,8 +14,8 @@ void App::Menu()
 	while (1)
 	{
 		Empty();
-		Print("GAME: " NAME, 12);
-		Print("Author: " AUTHOR "\n", 12);
+		Print("GAME: " NAME, Colour::LIGHTRED);
+		Print("Author: " AUTHOR "\n", Colour::LIGHTRED);
 		Print("[1] <Start>\n[2] <Exit>\n");
 
 		std::string tempCho;

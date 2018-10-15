@@ -172,24 +172,23 @@ void Dimension::Fight(Player &aPlayer)
 			Sleep(500);
 			if (tempCho > 0 && tempCho < 3)
 			{
-				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.Abilities[tempCho - 1].Damage) / (aPlayer.GetLevel() * 2)); //Calculated player damage.
-				Print("You dealt " + std::to_string(tempDealDamage) + " damage to the " + tempEnemies[i].GetName(), 11);
-				tempEnemies[i].SetHealth(-tempDealDamage);			
+				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.Abilities[tempCho - 1].Damage) / (aPlayer.GetLevel()* aPlayer.GetLevel())); //Calculated player damage.
+				Print("You dealt " + std::to_string(tempDealDamage) + " damage to the " + tempEnemies[i].GetName(), Colour::LIGHTCYAN);
+				tempEnemies[i].SetHealth(-tempDealDamage);
 
 				Sleep(500);
-				if (tempEnemies[i].GetHealth() <= 0) 
+				if (tempEnemies[i].GetHealth() <= 0)
 				{
-					Print(tempEnemies[i].Name + " died. Gained " + std::to_string(tempLootAmount) + " Gold", 10);
+					Print(tempEnemies[i].Name + " died. Gained " + std::to_string(tempLootAmount) + " Gold", Colour::LIGHTGREEN);
 					aPlayer.SetGold(tempLootAmount);
 					tempEnemies[i].AliveFlag = false;
 					myEnemyAmount--;
 				}
 				else
 				{
-
 					tempAbilityID = Randomize(0, 1);
-					tempTakeDamage = (((tempEnemies[i].GetDamage() + tempEnemies[i].Abilities[tempAbilityID].Damage) / aPlayer.GetResistance()) / (aPlayer.GetLevel() * 2));
-					Print(tempEnemies[i].GetName() + " used " + tempEnemies[i].Abilities[tempAbilityID].Name + " and you took " + std::to_string(tempTakeDamage) + " damage.", 12);
+					tempTakeDamage = (((tempEnemies[i].GetDamage() + tempEnemies[i].Abilities[tempAbilityID].Damage) / aPlayer.GetResistance()) / (aPlayer.GetLevel() *aPlayer.GetLevel()));
+					Print(tempEnemies[i].GetName() + " used " + tempEnemies[i].Abilities[tempAbilityID].Name + " and you took " + std::to_string(tempTakeDamage) + " damage.", Colour::LIGHTRED);
 					aPlayer.SetHealth(-tempTakeDamage);
 				}
 			}

@@ -26,7 +26,7 @@ void Town::Run(const Player aPlayer)
 		{
 			myPlayer.Update();
 
-			Print("Location: " TOWNNAME ", Town Square", 11);
+			Print("Location: " TOWNNAME ", Town Square", Colour::LIGHTCYAN);
 			Print("What would you like to do?");
 			Print("[1] <Shop>\n[2] <Enchantment Station>\n[3] <Open a Dimension> \n[4] <Inventory> ");
 			std::getline(std::cin, myChoToConvert);
@@ -111,27 +111,27 @@ void Town::OpenDimension()
 void Town::Shop()
 {
 	myItems = myItemManager.GetItems();
-	while (1) 
+	while (1)
 	{
 		Empty();
 		myPlayer.Update();
 		Print("SHOP:", 11);
 		for (size_t i = 0; i < myItems.size(); i++)
 		{
-			PrintCon("[" + std::to_string(i) + "] " + myItems[i].GetName());
-			Print(" > " + std::to_string(myItems[i].GetCost()) + " Gold", 14);
+			PrintCon(myItems[i].GetName());
+			Print(" > " + std::to_string(myItems[i].GetCost()) + " Gold", Colour::YELLOW);
 		}
 		Print("\n");
 
-		Print("\n[1] <Buy an Item> | [2] <Inspect Item> | [3] <Inventory> | [4] <Back>");
+		Print("\n[1] <Buy an Item> \n[2] <Inspect Item> \n[3] <Inventory> \n[4] <Back>");
 		std::getline(std::cin, myChoToConvert);
 
 		myCho = ConvertToInt(myChoToConvert);
 
-		if (myCho == 1) 
+		if (myCho == 1)
 		{
 			myCho = -1;
-			while (1) 
+			while (1)
 			{
 				Empty();
 				myPlayer.Update();
@@ -139,14 +139,14 @@ void Town::Shop()
 				for (size_t i = 0; i < myItems.size(); i++)
 				{
 					PrintCon("[" + std::to_string(i) + "] " + myItems[i].GetName());
-					Print(" > " + std::to_string(myItems[i].GetCost()) + " Gold", 14);
+					Print(" > " + std::to_string(myItems[i].GetCost()) + " Gold", Colour::YELLOW);
 				}
-				Print("\n[" + std::to_string(myItems.size() + 1) + "] Back");
+				Print("\n[" + std::to_string(myItems.size()) + "] Back");
 				Print("Which item would you like to buy?");
 				std::getline(std::cin, myChoToConvert);
 
 				myCho = ConvertToInt(myChoToConvert);
-				if (myCho >= 0 && myCho <= myItems.size())
+				if (myCho >= 0 && myCho <= myItems.size() - 1)
 				{
 					if (myPlayer.GetGold() >= myItems[myCho].GetCost())
 					{
@@ -160,7 +160,7 @@ void Town::Shop()
 						NotEnoughMoney();
 					}
 				}
-				else if (myCho == (myItems.size() + 1))
+				else if (myCho == (myItems.size()))
 				{
 					break;
 				}
@@ -185,23 +185,23 @@ void Town::Shop()
 				Print
 				(
 					"Name: " + myItems[myCho].GetName() + "\n" +
-					"Damage: " + std::to_string(myItems[myCho].GetDamageMultiplier()) + "\n\n" + 
+					"Damage: " + std::to_string(myItems[myCho].GetDamageMultiplier()) + "\n\n" +
 					"Healing Amount: " + std::to_string(myItems[myCho].HealingConstant)
 
 				);
 				for (size_t i = 0; i < 2; i++)
 				{
 					PrintCon("Ability " + std::to_string(i + 1) + ": " + myItems[myCho].Abilities[i].Name);
-					Print(" > " + std::to_string(myItems[myCho].Abilities[i].Damage) + " Damage", 12);
+					Print(" > " + std::to_string(myItems[myCho].Abilities[i].Damage) + " Damage", Colour::LIGHTRED);
 				}
-				Print("Cost: " + std::to_string(myItems[myCho].GetCost()), 14);
+				Print("Cost: " + std::to_string(myItems[myCho].GetCost()), Colour::YELLOW);
 
 				Print("\n\nPress 'ENTER' to go back.");
 				std::getline(std::cin, myChoToConvert);
 				break;
 			}
 		}
-		else if (myCho == 3) 
+		else if (myCho == 3)
 		{
 			myPlayer.Inventory();
 		}
