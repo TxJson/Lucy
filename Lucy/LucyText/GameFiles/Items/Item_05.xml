@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lucy>
+	<Item>
+		<Name> LeatherChestplate </Name>
+		<Id> 5 </Id>
+		<Type> 2 </Type>
+		<Abilities>
+			<A0> None </A0>
+				<A0_Damage> 0 </A0_Damage>
+			<A1> None </A1>
+				<A1_Damage> 0 </A1_Damage>
+		<Abilities>
+		<DamageMultiplier> 50 </DamageMultiplier>
+		<ProtectionMultiplier> 25 </ProtectionMultiplier>
+		<HealthMultiplier> 1000 </HealthMultiplier>
+		<HealingConstant> 0 </HealingConstant>
+		<Enchantable> 1 </Enchantable>
+		<Cost> 1750 </Cost>
+	</Item>
+</Lucy>

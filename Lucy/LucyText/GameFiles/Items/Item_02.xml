@@ -15,6 +15,6 @@
 		<HealthMultiplier> 0 </HealthMultiplier>
 		<HealingConstant> 200 </HealingConstant>
 		<Enchantable> 1 </Enchantable>
-		<Cost> 550 </Cost>
+		<Cost> 6000 </Cost>
 	</Item>
 </Lucy>

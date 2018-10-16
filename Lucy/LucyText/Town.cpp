@@ -182,12 +182,14 @@ void Town::Shop()
 			while (1)
 			{
 				Empty();
+				Print("Name: " + myItems[myCho].GetName() + "\n");
 				Print
 				(
-					"Name: " + myItems[myCho].GetName() + "\n" +
-					"Damage: " + std::to_string(myItems[myCho].GetDamageMultiplier()) + "\n\n" +
-					"Healing Amount: " + std::to_string(myItems[myCho].HealingConstant)
-
+					"Healing Amount: " + std::to_string(myItems[myCho].GetHealingConstant()) + "\n" +
+					"Health Addition: " + std::to_string(myItems[myCho].GetHealthMultiplier()) + "\n" +
+					"Protection Addition: " + std::to_string(myItems[myCho].GetProtectionMultiplier()) + "\n"
+					"Damage Addition: " + std::to_string(myItems[myCho].GetDamageMultiplier()) + "\n"
+					, Colour::LIGHTGREEN
 				);
 				for (size_t i = 0; i < 2; i++)
 				{

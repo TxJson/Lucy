@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lucy>
+	<Item>
+		<Name> LeatherHat </Name>
+		<Id> 4 </Id>
+		<Type> 1 </Type>
+		<Abilities>
+			<A0> None </A0>
+				<A0_Damage> 0 </A0_Damage>
+			<A1> None </A1>
+				<A1_Damage> 0 </A1_Damage>
+		<Abilities>
+		<DamageMultiplier> 15 </DamageMultiplier>
+		<ProtectionMultiplier> 15 </ProtectionMultiplier>
+		<HealthMultiplier> 250 </HealthMultiplier>
+		<HealingConstant> 0 </HealingConstant>
+		<Enchantable> 1 </Enchantable>
+		<Cost> 1050 </Cost>
+	</Item>
+</Lucy>

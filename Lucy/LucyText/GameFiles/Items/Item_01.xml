@@ -3,7 +3,7 @@
 	<Item>
 		<Name> Healing Pot </Name>
 		<Id> 1 </Id>
-		<Type> 3 </Type>
+		<Type> 6 </Type>
 		<Abilities>
 			<A0> None </A0>
 				<A0_Damage> 0 </A0_Damage>

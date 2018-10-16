@@ -1,0 +1,8 @@
+ItemType:
+0: Weapon
+1: Hat
+2: Chestplate
+3: Leggings
+4: Shoes
+5: Scroll
+6: Consumable

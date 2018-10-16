@@ -1,4 +1,0 @@
-0: Weapon
-1: Armor
-2: Scroll
-3: Consumable

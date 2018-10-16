@@ -35,6 +35,7 @@ public:
 	virtual const int& GetProtectionMultiplier() const { return ProtectionMultiplier; }
 	virtual const int& GetDamageMultiplier() const { return DamageMultiplier; }
 	virtual const int& GetHealingConstant() const { return HealingConstant; }
+	virtual const int& GetHealthMultiplier() const { return HealthMultiplier; }
 	virtual const int& GetCost() const { return Cost; }
 	virtual const std::string& GetName() const { return Name; } //Gets Name
 	virtual const float& GetDropRate() const { return DropRateChance; } //Gets Droprate
