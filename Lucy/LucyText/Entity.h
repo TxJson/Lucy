@@ -12,9 +12,13 @@ struct Ability
 enum ItemTypes
 {
 	WEAPON,
-	ARMOR,
+	HAT,
+	CHESTPLATE,
+	LEGGINGS,
+	SHOES,
 	SCROLL,
-	CONSUMABLE
+	CONSUMABLE,
+	LENGTH
 };
 
 class Entity
@@ -29,7 +33,7 @@ public:
 	virtual void SetGold(int someGold); //Sets Gold
 	virtual const int& GetGold() const { return Gold; } //Gets Gold
 	virtual const int& GetDamage() const { return Damage; }
-	virtual const int& GetResistance() const { return Resistance; } //Gets Resistance
+	virtual const int& GetResistance() const { return Protection; } //Gets Resistance
 	virtual const int& GetID() const { return ID; } //Gets ID
 	virtual const int& GetLevel() const { return Level; }
 	virtual const int& GetProtectionMultiplier() const { return ProtectionMultiplier; }
@@ -46,7 +50,7 @@ public:
 	int
 		Level,
 		Gold,
-		Resistance;
+		Protection;
 	float
 		DropRateChance;
 	int

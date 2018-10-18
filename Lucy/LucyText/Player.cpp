@@ -1,6 +1,5 @@
 #include "Player.h"
 #include "pch.h"
-#include "Calculate.h"
 
 #define INVENTORYLIMIT myCho <= myInventory.size()-1 && myCho >= 0
 
@@ -12,12 +11,14 @@ Player::Player()
 	Damage = 45;
 	Level = 1;
 	Gold = 150;
-	Resistance = 1;
+	Protection = 1;
 	Abilities[0].Name = "Hit";
 	Abilities[0].Damage = 15;
 	Abilities[1].Name = "Kick";
 	Abilities[1].Damage = 20;
 	AliveFlag = true;
+
+	EquipItem(myItemManager.GetItem(0), ItemTypes::WEAPON);
 }
 
 Player::~Player()
@@ -49,8 +50,12 @@ void Player::Inventory()
 		{
 			Print(myInventory[i].GetName());
 		}
+		for (size_t i = 0; i < myEquippedItems->size(); i++)
+		{
+			Print("Equipped Item: " + myEquippedItems->at(i).GetName());
+		}
 		Print("\n");
-		Print("\n[1] <Inspect Item> \n[2] <Throw Away Item> \n[3] <Use Item> \n[4] <Back>");
+		Print("\n[1] <Inspect Item> \n[2] <Throw Away Item> \n[3] <Use/Equip Item> \n[4] <Back>");
 		std::getline(std::cin, myChoToConvert);
 
 		myCho = ConvertToInt(myChoToConvert);
@@ -137,6 +142,32 @@ void Player::Inventory()
 			break;
 		}
 	}
+}
+
+void Player::Gear()
+{
+}
+
+void Player::EquipItem(Entity anItem, ItemTypes aType)
+{
+	//TODO: Unequip current item first.
+	myEquippedItems->at(aType) = anItem;
+	if (aType = ItemTypes::WEAPON)
+	{
+		for (size_t i = 0; i < 2; i++)
+		{
+			Abilities[i] = anItem.Abilities[i];
+		}
+	}
+
+	Damage += anItem.GetDamageMultiplier();
+	HealthMax += anItem.GetHealthMultiplier();
+	Health += anItem.GetHealthMultiplier();
+	Protection += anItem.GetProtectionMultiplier();
+}
+
+void Player::UnequipItem(ItemTypes aType)
+{
 }
 
 void Player::GiveItem(Entity anItem)

@@ -1,7 +1,6 @@
 #include "ItemManager.h"
 #include "File.h"
 
-
 ItemManager::ItemManager()
 {
 	myFiles = GetXmlFiles(myPath);
@@ -39,4 +38,9 @@ Entity ItemManager::GetRandomItem()
 {
 	myItemID = Randomize(0, (int)myItems.size());
 	return myItems[myItemID];
+}
+
+Entity ItemManager::GetItem(int anId)
+{
+	return myItems[anId];
 }

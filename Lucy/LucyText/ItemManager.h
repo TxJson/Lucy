@@ -11,6 +11,7 @@ public:
 	~ItemManager();
 
 	Entity GetRandomItem();
+	Entity GetItem(int anItemId);
 	virtual const std::vector<Entity>& GetItems() const { return myItems; }
 
 private:

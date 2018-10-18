@@ -5,9 +5,9 @@
 #include <vector>
 #include "Entity.h"
 
-
 inline std::vector<Entity> EraseIfDead(std::vector<Entity> &someEntities)
 {
+	//If entity is dead, remove from vector
 	someEntities.erase(
 		std::remove_if(
 			someEntities.begin(),

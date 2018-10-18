@@ -68,7 +68,7 @@
     <ClInclude Include="ItemManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Calculate.h">
+    <ClInclude Include="EntityManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
