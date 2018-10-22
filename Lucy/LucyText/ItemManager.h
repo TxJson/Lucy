@@ -12,6 +12,7 @@ public:
 
 	Entity GetRandomItem();
 	Entity GetItem(int anItemId);
+	Entity GetItemByType(ItemTypes aType);
 	virtual const std::vector<Entity>& GetItems() const { return myItems; }
 
 private:

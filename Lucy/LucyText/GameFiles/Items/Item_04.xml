@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Lucy>
 	<Item>
-		<Name> LeatherHat </Name>
+		<Name> LeatherHelmet </Name>
 		<Id> 4 </Id>
 		<Type> 1 </Type>
 		<Abilities>

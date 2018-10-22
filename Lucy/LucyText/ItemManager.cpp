@@ -8,24 +8,25 @@ ItemManager::ItemManager()
 	for (size_t x = 0; x < myItems.size(); x++)
 	{
 		myItems[x].Name = GetFromXml(myFiles[x], "Name");
-		myItems[x].ID = ConvertToInt(GetFromXml(myFiles[x], "Id"));
-		myItems[x].DamageMultiplier = ConvertToInt(GetFromXml(myFiles[x], "DamageMultiplier"));
-		myItems[x].ProtectionMultiplier = ConvertToInt(GetFromXml(myFiles[x], "ProtectionMultiplier"));
-		myItems[x].HealthMultiplier = ConvertToInt(GetFromXml(myFiles[x], "HealthMultiplier"));
-		myItems[x].Enchantable = ConvertToInt(GetFromXml(myFiles[x], "Enchantable"));
-		myItems[x].HealingConstant = ConvertToInt(GetFromXml(myFiles[x], "HealingConstant"));
-		myItems[x].Cost = ConvertToInt(GetFromXml(myFiles[x], "Cost"));
+		myItems[x].myId = ConvertToInt(GetFromXml(myFiles[x], "Id"));
+		myItems[x].myItemType = (ItemTypes)ConvertToInt(GetFromXml(myFiles[x], "Type"));
+		myItems[x].myDamageMultiplier = ConvertToInt(GetFromXml(myFiles[x], "DamageMultiplier"));
+		myItems[x].myProtectionMultiplier = ConvertToInt(GetFromXml(myFiles[x], "ProtectionMultiplier"));
+		myItems[x].myHealthMultiplier = ConvertToInt(GetFromXml(myFiles[x], "HealthMultiplier"));
+		myItems[x].myEnchantable = ConvertToInt(GetFromXml(myFiles[x], "Enchantable"));
+		myItems[x].myHealingConstant = ConvertToInt(GetFromXml(myFiles[x], "HealingConstant"));
+		myItems[x].myCost = ConvertToInt(GetFromXml(myFiles[x], "Cost"));
 
 		//Debug
-		if (myItems[x].Enchantable)
+		if (myItems[x].myEnchantable)
 			Print("0");
 		else
 			Print("1");
 
 		for (size_t y = 0; y < 2; y++)
 		{
-			myItems[x].Abilities[y].Name = GetFromXml(myFiles[x], "A" + std::to_string(y));
-			myItems[x].Abilities[y].Damage = ConvertToInt(GetFromXml(myFiles[x], "A" + std::to_string(y) + "_Damage"));
+			myItems[x].myAbilities[y].myName = GetFromXml(myFiles[x], "A" + std::to_string(y));
+			myItems[x].myAbilities[y].myDamage = ConvertToInt(GetFromXml(myFiles[x], "A" + std::to_string(y) + "_Damage"));
 		}
 	}
 }
@@ -43,4 +44,17 @@ Entity ItemManager::GetRandomItem()
 Entity ItemManager::GetItem(int anId)
 {
 	return myItems[anId];
+}
+
+Entity ItemManager::GetItemByType(ItemTypes aType)
+{
+	std::vector<Entity> tempEntityOfType;
+	for (size_t i = 0; i < myItems.size(); i++)
+	{
+		if (myItems.at(i).GetItemType() == aType)
+		{
+			tempEntityOfType.push_back(myItems.at(i));
+		}
+	}
+	return (tempEntityOfType.size() > 0) ? tempEntityOfType.at(Randomize(0, (int)tempEntityOfType.size())) : myItems.at(0);
 }

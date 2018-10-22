@@ -5,14 +5,14 @@
 
 struct Ability
 {
-	std::string Name;
-	int Damage;
+	std::string myName;
+	int myDamage;
 };
 
 enum ItemTypes
 {
 	WEAPON,
-	HAT,
+	HELMET,
 	CHESTPLATE,
 	LEGGINGS,
 	SHOES,
@@ -29,44 +29,44 @@ public:
 
 	virtual void Update();
 	virtual void SetHealth(int someHealth); //Sets Health
-	virtual const int& GetHealth() const { return Health; } //Gets Health
+	virtual const int& GetHealth(); //Gets Health
 	virtual void SetGold(int someGold); //Sets Gold
-	virtual const int& GetGold() const { return Gold; } //Gets Gold
-	virtual const int& GetDamage() const { return Damage; }
-	virtual const int& GetResistance() const { return Protection; } //Gets Resistance
-	virtual const int& GetID() const { return ID; } //Gets ID
-	virtual const int& GetLevel() const { return Level; }
-	virtual const int& GetProtectionMultiplier() const { return ProtectionMultiplier; }
-	virtual const int& GetDamageMultiplier() const { return DamageMultiplier; }
-	virtual const int& GetHealingConstant() const { return HealingConstant; }
-	virtual const int& GetHealthMultiplier() const { return HealthMultiplier; }
-	virtual const int& GetCost() const { return Cost; }
-	virtual const std::string& GetName() const { return Name; } //Gets Name
-	virtual const float& GetDropRate() const { return DropRateChance; } //Gets Droprate
-	virtual const ItemTypes& GetItemType() const { return ItemType; }
+	virtual const int& GetGold(); //Gets Gold
+	virtual const int& GetDamage();
+	virtual const int& GetProtection(); //Gets Resistance
+	virtual const int& GetID(); //Gets ID
+	virtual const int& GetLevel();
+	virtual const int& GetProtectionMultiplier();
+	virtual const int& GetDamageMultiplier();
+	virtual const int& GetHealingConstant();
+	virtual const int& GetHealthMultiplier();
+	virtual const int& GetCost();
+	virtual const std::string& GetName();
+	virtual const float& GetDropRate();
+	virtual const ItemTypes& GetItemType();
 
 	std::string Name;
 	bool AliveFlag;
 	int
-		Level,
-		Gold,
-		Protection;
+		myLevel,
+		myGold,
+		myProtection;
 	float
-		DropRateChance;
+		myDropRate;
 	int
-		Health,
-		HealthMax,
-		Damage,
-		ID,
-		HealthMultiplier,
-		DamageMultiplier,
-		ProtectionMultiplier,
-		HealingConstant,
-		Cost;
-	bool Enchantable;
+		myHealth,
+		myHealthMax,
+		myDamage,
+		myId,
+		myHealthMultiplier,
+		myDamageMultiplier,
+		myProtectionMultiplier,
+		myHealingConstant,
+		myCost;
+	bool myEnchantable;
 
-	ItemTypes ItemType;
-	Ability Abilities[2];
+	ItemTypes myItemType;
+	Ability myAbilities[2];
 };
 
 #endif

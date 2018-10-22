@@ -6,19 +6,23 @@
 Player::Player()
 {
 	Name = "Lucy";
-	HealthMax = 1575;
-	Health = HealthMax;
-	Damage = 45;
-	Level = 1;
-	Gold = 150;
-	Protection = 1;
-	Abilities[0].Name = "Hit";
-	Abilities[0].Damage = 15;
-	Abilities[1].Name = "Kick";
-	Abilities[1].Damage = 20;
+	myHealthMax = 1575;
+	myHealth = myHealthMax;
+	myDamage = 45;
+	myLevel = 1;
+	myGold = 150;
+	myProtection = 1;
+	myAbilities[0].myName = "Hit";
+	myAbilities[0].myDamage = 15;
+	myAbilities[1].myName = "Kick";
+	myAbilities[1].myDamage = 20;
 	AliveFlag = true;
 
-	EquipItem(myItemManager.GetItem(0), ItemTypes::WEAPON);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::WEAPON), ItemTypes::WEAPON);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::HELMET), ItemTypes::HELMET);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::CHESTPLATE), ItemTypes::CHESTPLATE);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::LEGGINGS), ItemTypes::LEGGINGS);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::SHOES), ItemTypes::SHOES);
 }
 
 Player::~Player()
@@ -31,9 +35,9 @@ void Player::Update()
 	Print
 	(
 		"Name: " + Name + "\n"
-		+ "Level: " + std::to_string(Level) + "\n"
-		+ "Health: " + std::to_string(Health) + "\n"
-		+ "Gold: " + std::to_string(Gold) + "\n"
+		+ "Level: " + std::to_string(myLevel) + "\n"
+		+ "Health: " + std::to_string(myHealth) + "\n"
+		+ "Gold: " + std::to_string(myGold) + "\n"
 		, Colour::MAGENTA
 	);
 }
@@ -50,10 +54,7 @@ void Player::Inventory()
 		{
 			Print(myInventory[i].GetName());
 		}
-		for (size_t i = 0; i < myEquippedItems->size(); i++)
-		{
-			Print("Equipped Item: " + myEquippedItems->at(i).GetName());
-		}
+		Gear();
 		Print("\n");
 		Print("\n[1] <Inspect Item> \n[2] <Throw Away Item> \n[3] <Use/Equip Item> \n[4] <Back>");
 		std::getline(std::cin, myChoToConvert);
@@ -79,12 +80,12 @@ void Player::Inventory()
 					(
 						"Name: " + myInventory[myCho].GetName() + "\n" +
 						"Damage: " + std::to_string(myInventory[myCho].GetDamageMultiplier()) + "\n\n" +
-						"Healing Amount: " + std::to_string(myInventory[myCho].HealingConstant)
+						"Healing Amount: " + std::to_string(myInventory[myCho].myHealingConstant)
 					);
 					for (size_t i = 0; i < 2; i++)
 					{
-						PrintCon("Ability " + std::to_string(i + 1) + ": " + myInventory[myCho].Abilities[i].Name);
-						Print(" > " + std::to_string(myInventory[myCho].Abilities[i].Damage) + " Damage", Colour::LIGHTRED);
+						PrintCon("Ability " + std::to_string(i + 1) + ": " + myInventory[myCho].myAbilities[i].myName);
+						Print(" > " + std::to_string(myInventory[myCho].myAbilities[i].myDamage) + " Damage", Colour::LIGHTRED);
 					}
 
 					Print("\n\nPress 'ENTER' to go back.");
@@ -146,24 +147,48 @@ void Player::Inventory()
 
 void Player::Gear()
 {
+	PrintCon("Weapon: ", Colour::LIGHTCYAN);
+	Print(myGear.myWeapon.GetName());
+	PrintCon("Helmet: ", Colour::LIGHTCYAN);
+	Print(myGear.myHelmet.GetName());
+	PrintCon("Chestplate: ", Colour::LIGHTCYAN);
+	Print(myGear.myChestplate.GetName());
+	PrintCon("Leggings:", Colour::LIGHTCYAN);
+	Print(myGear.myLeggings.GetName());
+	PrintCon("Shoes: ", Colour::LIGHTCYAN);
+	Print(myGear.myShoes.GetName());
+	Print("\n");
 }
 
 void Player::EquipItem(Entity anItem, ItemTypes aType)
 {
 	//TODO: Unequip current item first.
-	myEquippedItems->at(aType) = anItem;
-	if (aType = ItemTypes::WEAPON)
+	switch (aType)
 	{
+	case ItemTypes::WEAPON:
+		myGear.myWeapon = anItem;
 		for (size_t i = 0; i < 2; i++)
 		{
-			Abilities[i] = anItem.Abilities[i];
+			myAbilities[i] = anItem.myAbilities[i];
 		}
+		break;
+	case ItemTypes::HELMET:
+		myGear.myHelmet = anItem;
+		break;
+	case ItemTypes::CHESTPLATE:
+		myGear.myChestplate = anItem;
+		break;
+	case ItemTypes::LEGGINGS:
+		myGear.myLeggings = anItem;
+		break;
+	case ItemTypes::SHOES:
+		myGear.myShoes = anItem;
+		break;
 	}
-
-	Damage += anItem.GetDamageMultiplier();
-	HealthMax += anItem.GetHealthMultiplier();
-	Health += anItem.GetHealthMultiplier();
-	Protection += anItem.GetProtectionMultiplier();
+	myDamage += anItem.GetDamageMultiplier();
+	myHealthMax += anItem.GetHealthMultiplier();
+	myHealth += anItem.GetHealthMultiplier();
+	myProtection += anItem.GetProtectionMultiplier();
 }
 
 void Player::UnequipItem(ItemTypes aType)
@@ -176,9 +201,43 @@ void Player::GiveItem(Entity anItem)
 	Sleep(10);
 }
 
+void Player::Choices()
+{
+	while (1)
+	{
+		Empty();
+		Update();
+
+		Print("[1] <Statistics>");
+		Print("[2] <Inventory>");
+		Print("[3] <Back>");
+
+		std::getline(std::cin, myChoToConvert);
+
+		myCho = ConvertToInt(myChoToConvert);
+
+		if (myCho == 1)
+		{
+			Statistics();
+		}
+		else if (myCho == 2)
+		{
+			Inventory();
+		}
+		else if (myCho == 3)
+		{
+			break;
+		}
+	}
+}
+
 void Player::CalculateGold()
 {
-	Gold = (Gold < 0) ? 0 : Gold;
+	myGold = (myGold < 0) ? 0 : myGold;
+}
+
+void Player::Statistics()
+{
 }
 
 void Player::PrintInventory()

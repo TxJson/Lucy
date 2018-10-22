@@ -16,22 +16,92 @@ void Entity::Update()
 
 void Entity::SetHealth(int someHealth)
 {
-	Health += someHealth;
-	if (Health > HealthMax)
+	myHealth += someHealth;
+	if (myHealth > myHealthMax)
 	{
-		Health = HealthMax;
+		myHealth = myHealthMax;
 	}
-	else if (Health < 0)
+	else if (myHealth < 0)
 	{
-		Health = 0;
+		myHealth = 0;
 	}
+}
+
+const int & Entity::GetHealth()
+{
+	return this->myHealth;
 }
 
 void Entity::SetGold(int someGold)
 {
-	Gold += someGold;
-	if (Gold < 0)
+	myGold += someGold;
+	if (myGold < 0)
 	{
-		Gold = 0;
+		myGold = 0;
 	}
+}
+
+const int & Entity::GetGold()
+{
+	return this->myGold;
+}
+
+const int & Entity::GetDamage()
+{
+	return this->myDamage;
+}
+
+const int & Entity::GetProtection()
+{
+	return this->myProtection;
+}
+
+const int & Entity::GetID()
+{
+	return this->myId;
+}
+
+const int & Entity::GetLevel()
+{
+	return this->myLevel;
+}
+
+const int & Entity::GetProtectionMultiplier()
+{
+	return this->myProtectionMultiplier;
+}
+
+const int & Entity::GetDamageMultiplier()
+{
+	return this->myDamageMultiplier;
+}
+
+const int & Entity::GetHealingConstant()
+{
+	return this->myHealingConstant;
+}
+
+const int & Entity::GetHealthMultiplier()
+{
+	return this->myHealthMultiplier;
+}
+
+const int & Entity::GetCost()
+{
+	return this->myCost;
+}
+
+const std::string & Entity::GetName()
+{
+	return this->Name;
+}
+
+const float & Entity::GetDropRate()
+{
+	return this->myDropRate;
+}
+
+const ItemTypes & Entity::GetItemType()
+{
+	return this->myItemType;
 }

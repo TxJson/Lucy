@@ -28,7 +28,7 @@ void Town::Run(const Player aPlayer)
 
 			Print("Location: " TOWNNAME ", Town Square", Colour::LIGHTCYAN);
 			Print("What would you like to do?");
-			Print("[1] <Shop>\n[2] <Enchantment Station>\n[3] <Open a Dimension> \n[4] <Inventory> ");
+			Print("[1] <Shop>\n[2] <Enchantment Station>\n[3] <Open a Dimension> \n[4] <Player Information> ");
 			std::getline(std::cin, myChoToConvert);
 
 			myCho = ConvertToInt(myChoToConvert);
@@ -44,7 +44,7 @@ void Town::Run(const Player aPlayer)
 				OpenDimension();
 				break;
 			case 4:
-				myPlayer.Inventory();
+				myPlayer.Choices();
 				break;
 			case 47190:
 				myPlayer.SetGold(15000); //Cheat code for easier debugging.
@@ -90,9 +90,9 @@ void Town::OpenDimension()
 
 		if (myCho == 1)
 		{
-			if (myPlayer.Gold >= myDimensionCost)
+			if (myPlayer.myGold >= myDimensionCost)
 			{
-				myPlayer.Gold -= myDimensionCost;
+				myPlayer.myGold -= myDimensionCost;
 				myDimension.Run(myPlayer);
 			}
 			else
@@ -123,7 +123,7 @@ void Town::Shop()
 		}
 		Print("\n");
 
-		Print("\n[1] <Buy an Item> \n[2] <Inspect Item> \n[3] <Inventory> \n[4] <Back>");
+		Print("\n[1] <Buy an Item> \n[2] <Inspect Item> \n[3] <Player Information> \n[4] <Back>");
 		std::getline(std::cin, myChoToConvert);
 
 		myCho = ConvertToInt(myChoToConvert);
@@ -193,8 +193,8 @@ void Town::Shop()
 				);
 				for (size_t i = 0; i < 2; i++)
 				{
-					PrintCon("Ability " + std::to_string(i + 1) + ": " + myItems[myCho].Abilities[i].Name);
-					Print(" > " + std::to_string(myItems[myCho].Abilities[i].Damage) + " Damage", Colour::LIGHTRED);
+					PrintCon("Ability " + std::to_string(i + 1) + ": " + myItems[myCho].myAbilities[i].myName);
+					Print(" > " + std::to_string(myItems[myCho].myAbilities[i].myDamage) + " Damage", Colour::LIGHTRED);
 				}
 				Print("Cost: " + std::to_string(myItems[myCho].GetCost()), Colour::YELLOW);
 
@@ -205,7 +205,7 @@ void Town::Shop()
 		}
 		else if (myCho == 3)
 		{
-			myPlayer.Inventory();
+			myPlayer.Choices();
 		}
 		else if (myCho == 4)
 		{

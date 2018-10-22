@@ -160,8 +160,8 @@ void Dimension::Fight(Player &aPlayer)
 		Print("\nAbilities: ", 10);
 		for (size_t i = 0; i < 2; i++)
 		{
-			PrintCon("[" + std::to_string(i + 1) + "] " + aPlayer.Abilities[i].Name);
-			Print(" | Damage: " + std::to_string(((aPlayer.GetDamage() + aPlayer.Abilities[i].Damage) / (aPlayer.GetLevel() * 2))));
+			PrintCon("[" + std::to_string(i + 1) + "] " + aPlayer.myAbilities[i].myName);
+			Print(" | Damage: " + std::to_string(((aPlayer.GetDamage() + aPlayer.myAbilities[i].myDamage) / (aPlayer.GetLevel() * 2))));
 		}
 
 		std::getline(std::cin, myChoToConvert);
@@ -172,7 +172,7 @@ void Dimension::Fight(Player &aPlayer)
 			Sleep(500);
 			if (tempCho > 0 && tempCho < 3)
 			{
-				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.Abilities[tempCho - 1].Damage) / (aPlayer.GetLevel()* aPlayer.GetLevel())); //Calculated player damage.
+				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.myAbilities[tempCho - 1].myDamage) / (aPlayer.GetLevel()* aPlayer.GetLevel())); //Calculated player damage.
 				Print("You dealt " + std::to_string(tempDealDamage) + " damage to the " + tempEnemies[i].GetName(), Colour::LIGHTCYAN);
 				tempEnemies[i].SetHealth(-tempDealDamage);
 
@@ -187,8 +187,8 @@ void Dimension::Fight(Player &aPlayer)
 				else
 				{
 					tempAbilityID = Randomize(0, 1);
-					tempTakeDamage = (((tempEnemies[i].GetDamage() + tempEnemies[i].Abilities[tempAbilityID].Damage) / aPlayer.GetResistance()) / (aPlayer.GetLevel() *aPlayer.GetLevel()));
-					Print(tempEnemies[i].GetName() + " used " + tempEnemies[i].Abilities[tempAbilityID].Name + " and you took " + std::to_string(tempTakeDamage) + " damage.", Colour::LIGHTRED);
+					tempTakeDamage = (((tempEnemies[i].GetDamage() + tempEnemies[i].myAbilities[tempAbilityID].myDamage) / aPlayer.GetProtection()) / (aPlayer.GetLevel() *aPlayer.GetLevel()));
+					Print(tempEnemies[i].GetName() + " used " + tempEnemies[i].myAbilities[tempAbilityID].myName + " and you took " + std::to_string(tempTakeDamage) + " damage.", Colour::LIGHTRED);
 					aPlayer.SetHealth(-tempTakeDamage);
 				}
 			}
@@ -202,7 +202,7 @@ void Dimension::Fight(Player &aPlayer)
 		tempEnemies = EraseIfDead(tempEnemies);
 		tempEnemies.resize(myEnemyAmount);
 
-		if (aPlayer.Health <= 0)
+		if (aPlayer.myHealth <= 0)
 		{
 			Sleep(750);
 			Print("\n\nYOU DIED!", 12);
