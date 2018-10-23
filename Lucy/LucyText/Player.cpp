@@ -54,7 +54,6 @@ void Player::Inventory()
 		{
 			Print(myInventory[i].GetName());
 		}
-		Gear();
 		Print("\n");
 		Print("\n[1] <Inspect Item> \n[2] <Throw Away Item> \n[3] <Use/Equip Item> \n[4] <Back>");
 		std::getline(std::cin, myChoToConvert);
@@ -147,17 +146,30 @@ void Player::Inventory()
 
 void Player::Gear()
 {
-	PrintCon("Weapon: ", Colour::LIGHTCYAN);
-	Print(myGear.myWeapon.GetName());
-	PrintCon("Helmet: ", Colour::LIGHTCYAN);
-	Print(myGear.myHelmet.GetName());
-	PrintCon("Chestplate: ", Colour::LIGHTCYAN);
-	Print(myGear.myChestplate.GetName());
-	PrintCon("Leggings:", Colour::LIGHTCYAN);
-	Print(myGear.myLeggings.GetName());
-	PrintCon("Shoes: ", Colour::LIGHTCYAN);
-	Print(myGear.myShoes.GetName());
-	Print("\n");
+	while (1)
+	{
+		Empty();
+		Update();
+
+		Print("GEAR: \n", Colour::LIGHTBLUE);
+
+		PrintCon("Weapon: ", Colour::LIGHTCYAN);
+		Print(myGearThings->at(ItemTypes::WEAPON).GetName());
+		PrintCon("Helmet: ", Colour::LIGHTCYAN);
+		Print(myGearThings->at(ItemTypes::HELMET).GetName());
+		PrintCon("Chestplate: ", Colour::LIGHTCYAN);
+		Print(myGearThings->at(ItemTypes::CHESTPLATE).GetName());
+		PrintCon("Leggings:", Colour::LIGHTCYAN);
+		Print(myGearThings->at(ItemTypes::LEGGINGS).GetName());
+		//PrintCon("Shoes: ", Colour::LIGHTCYAN);
+		//Print(myGearThings->at(ItemTypes::SHOES).GetName());
+		//Print("\n");
+
+		Print("[1] <Inspect> \n[2] <Equip> \n[3] <Unequip> \n[4] <Back>");
+		std::getline(std::cin, myChoToConvert);
+
+		myCho = ConvertToInt(myChoToConvert);
+	}
 }
 
 void Player::EquipItem(Entity anItem, ItemTypes aType)
@@ -166,23 +178,23 @@ void Player::EquipItem(Entity anItem, ItemTypes aType)
 	switch (aType)
 	{
 	case ItemTypes::WEAPON:
-		myGear.myWeapon = anItem;
+		myGearThings->assign(ItemTypes::WEAPON, anItem);
 		for (size_t i = 0; i < 2; i++)
 		{
 			myAbilities[i] = anItem.myAbilities[i];
 		}
 		break;
 	case ItemTypes::HELMET:
-		myGear.myHelmet = anItem;
+		myGearThings->assign(ItemTypes::HELMET, anItem);
 		break;
 	case ItemTypes::CHESTPLATE:
-		myGear.myChestplate = anItem;
+		myGearThings->assign(ItemTypes::CHESTPLATE, anItem);
 		break;
 	case ItemTypes::LEGGINGS:
-		myGear.myLeggings = anItem;
+		myGearThings->assign(ItemTypes::LEGGINGS, anItem);
 		break;
 	case ItemTypes::SHOES:
-		myGear.myShoes = anItem;
+		myGearThings->assign(ItemTypes::SHOES, anItem);
 		break;
 	}
 	myDamage += anItem.GetDamageMultiplier();
@@ -191,8 +203,35 @@ void Player::EquipItem(Entity anItem, ItemTypes aType)
 	myProtection += anItem.GetProtectionMultiplier();
 }
 
-void Player::UnequipItem(ItemTypes aType)
+void Player::UnequipItem(Entity anItem, ItemTypes aType)
 {
+	//switch (aType)
+	//{
+	//case ItemTypes::WEAPON:
+	//	myGear.myWeapon = Entity();
+	//	myAbilities[0].myName = "Hit";
+	//	myAbilities[0].myDamage = 15;
+	//	myAbilities[1].myName = "Kick";
+	//	myAbilities[1].myDamage = 20;
+	//	break;
+	//case ItemTypes::HELMET:
+	//	myGear.myHelmet = Entity();
+	//	break;
+	//case ItemTypes::CHESTPLATE:
+	//	myGear.myChestplate = Entity();
+	//	break;
+	//case ItemTypes::LEGGINGS:
+	//	myGear.myLeggings = Entity();
+	//	break;
+	//case ItemTypes::SHOES:
+	//	myGear.myShoes = Entity();
+	//	break;
+	//}
+
+	//myDamage -= anItem.GetDamageMultiplier();
+	//myHealthMax -= anItem.GetHealthMultiplier();
+	//myHealth -= anItem.GetHealthMultiplier();
+	//myProtection -= anItem.GetProtectionMultiplier();
 }
 
 void Player::GiveItem(Entity anItem)
@@ -210,7 +249,8 @@ void Player::Choices()
 
 		Print("[1] <Statistics>");
 		Print("[2] <Inventory>");
-		Print("[3] <Back>");
+		Print("[3] <Gear>");
+		Print("[4] <Back>");
 
 		std::getline(std::cin, myChoToConvert);
 
@@ -225,6 +265,10 @@ void Player::Choices()
 			Inventory();
 		}
 		else if (myCho == 3)
+		{
+			Gear();
+		}
+		else if (myCho == 4)
 		{
 			break;
 		}

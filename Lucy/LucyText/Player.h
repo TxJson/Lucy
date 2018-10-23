@@ -6,15 +6,6 @@
 #include "ItemManager.h"
 #include "EntityManagement.h"
 
-struct GearToEquip
-{
-	Entity myHelmet;
-	Entity myChestplate;
-	Entity myLeggings;
-	Entity myShoes;
-	Entity myWeapon;
-};
-
 class Player : public Entity
 {
 public:
@@ -25,7 +16,7 @@ public:
 	void Update();
 	void Gear();
 	void EquipItem(Entity anItem, ItemTypes aType);
-	void UnequipItem(ItemTypes aType);
+	void UnequipItem(Entity anItem, ItemTypes aType);
 	void GiveItem(Entity anItem);
 	void Choices();
 
@@ -37,7 +28,7 @@ private:
 	void PrintInventory();
 	std::string myChoToConvert;
 	int myCho;
-	GearToEquip myGear;
 	std::vector<Entity> myInventory;
+	std::vector<Entity> myGearThings[5];
 };
 #endif
