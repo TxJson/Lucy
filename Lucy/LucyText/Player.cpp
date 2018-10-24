@@ -18,11 +18,11 @@ Player::Player()
 	myAbilities[1].myDamage = 20;
 	AliveFlag = true;
 
-	EquipItem(myItemManager.GetItemByType(ItemTypes::WEAPON), ItemTypes::WEAPON);
-	EquipItem(myItemManager.GetItemByType(ItemTypes::HELMET), ItemTypes::HELMET);
-	EquipItem(myItemManager.GetItemByType(ItemTypes::CHESTPLATE), ItemTypes::CHESTPLATE);
-	EquipItem(myItemManager.GetItemByType(ItemTypes::LEGGINGS), ItemTypes::LEGGINGS);
-	EquipItem(myItemManager.GetItemByType(ItemTypes::SHOES), ItemTypes::SHOES);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::WEAPON), ItemTypes::WEAPON, true);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::HELMET), ItemTypes::HELMET, true);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::CHESTPLATE), ItemTypes::CHESTPLATE, true);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::LEGGINGS), ItemTypes::LEGGINGS, true);
+	EquipItem(myItemManager.GetItemByType(ItemTypes::SHOES), ItemTypes::SHOES, true);
 }
 
 Player::~Player()
@@ -152,51 +152,33 @@ void Player::Gear()
 		Update();
 
 		Print("GEAR: \n", Colour::LIGHTBLUE);
-
 		PrintCon("Weapon: ", Colour::LIGHTCYAN);
-		Print(myGearThings->at(ItemTypes::WEAPON).GetName());
+		Print(myGear[ItemTypes::WEAPON].GetName());
 		PrintCon("Helmet: ", Colour::LIGHTCYAN);
-		Print(myGearThings->at(ItemTypes::HELMET).GetName());
+		Print(myGear[ItemTypes::HELMET].GetName());
 		PrintCon("Chestplate: ", Colour::LIGHTCYAN);
-		Print(myGearThings->at(ItemTypes::CHESTPLATE).GetName());
-		PrintCon("Leggings:", Colour::LIGHTCYAN);
-		Print(myGearThings->at(ItemTypes::LEGGINGS).GetName());
-		//PrintCon("Shoes: ", Colour::LIGHTCYAN);
-		//Print(myGearThings->at(ItemTypes::SHOES).GetName());
-		//Print("\n");
+		Print(myGear[ItemTypes::CHESTPLATE].GetName());
+		PrintCon("Leggings: ", Colour::LIGHTCYAN);
+		Print(myGear[ItemTypes::LEGGINGS].GetName());
+		PrintCon("Shoes: ", Colour::LIGHTCYAN);
+		Print(myGear[ItemTypes::SHOES].GetName());
+		Print("\n");
 
-		Print("[1] <Inspect> \n[2] <Equip> \n[3] <Unequip> \n[4] <Back>");
+		Print("[1] <Inspect> \n[2] <Unequip> \n[3] <Back>");
 		std::getline(std::cin, myChoToConvert);
 
 		myCho = ConvertToInt(myChoToConvert);
 	}
 }
 
-void Player::EquipItem(Entity anItem, ItemTypes aType)
+void Player::EquipItem(Entity anItem, ItemTypes aType, bool aStartFlag = false)
 {
-	//TODO: Unequip current item first.
-	switch (aType)
+	if (!aStartFlag)
 	{
-	case ItemTypes::WEAPON:
-		myGearThings->assign(ItemTypes::WEAPON, anItem);
-		for (size_t i = 0; i < 2; i++)
-		{
-			myAbilities[i] = anItem.myAbilities[i];
-		}
-		break;
-	case ItemTypes::HELMET:
-		myGearThings->assign(ItemTypes::HELMET, anItem);
-		break;
-	case ItemTypes::CHESTPLATE:
-		myGearThings->assign(ItemTypes::CHESTPLATE, anItem);
-		break;
-	case ItemTypes::LEGGINGS:
-		myGearThings->assign(ItemTypes::LEGGINGS, anItem);
-		break;
-	case ItemTypes::SHOES:
-		myGearThings->assign(ItemTypes::SHOES, anItem);
-		break;
+		UnequipItem(myGear[aType], aType); //Unequips current item at slot
 	}
+
+	myGear[aType] = anItem; //Equips new item
 	myDamage += anItem.GetDamageMultiplier();
 	myHealthMax += anItem.GetHealthMultiplier();
 	myHealth += anItem.GetHealthMultiplier();
@@ -205,33 +187,24 @@ void Player::EquipItem(Entity anItem, ItemTypes aType)
 
 void Player::UnequipItem(Entity anItem, ItemTypes aType)
 {
-	//switch (aType)
-	//{
-	//case ItemTypes::WEAPON:
-	//	myGear.myWeapon = Entity();
-	//	myAbilities[0].myName = "Hit";
-	//	myAbilities[0].myDamage = 15;
-	//	myAbilities[1].myName = "Kick";
-	//	myAbilities[1].myDamage = 20;
-	//	break;
-	//case ItemTypes::HELMET:
-	//	myGear.myHelmet = Entity();
-	//	break;
-	//case ItemTypes::CHESTPLATE:
-	//	myGear.myChestplate = Entity();
-	//	break;
-	//case ItemTypes::LEGGINGS:
-	//	myGear.myLeggings = Entity();
-	//	break;
-	//case ItemTypes::SHOES:
-	//	myGear.myShoes = Entity();
-	//	break;
-	//}
+	if (!myGear[aType].AliveFlag)
+	{
+		return;
+	}
+	myInventory.push_back(myGear[aType]);
+	if (aType = ItemTypes::WEAPON)
+	{
+		myAbilities[0].myName = "Hit";
+		myAbilities[0].myDamage = 15;
+		myAbilities[1].myName = "Kick";
+		myAbilities[1].myDamage = 20;
+	}
+	myGear[aType] = Entity();
 
-	//myDamage -= anItem.GetDamageMultiplier();
-	//myHealthMax -= anItem.GetHealthMultiplier();
-	//myHealth -= anItem.GetHealthMultiplier();
-	//myProtection -= anItem.GetProtectionMultiplier();
+	myDamage -= anItem.GetDamageMultiplier();
+	myHealthMax -= anItem.GetHealthMultiplier();
+	myHealth -= anItem.GetHealthMultiplier();
+	myProtection -= anItem.GetProtectionMultiplier();
 }
 
 void Player::GiveItem(Entity anItem)

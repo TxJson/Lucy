@@ -5,6 +5,7 @@
 #include <vector>
 #include "ItemManager.h"
 #include "EntityManagement.h"
+#include <map>
 
 class Player : public Entity
 {
@@ -15,7 +16,7 @@ public:
 	int myHealthLimit;
 	void Update();
 	void Gear();
-	void EquipItem(Entity anItem, ItemTypes aType);
+	void EquipItem(Entity anItem, ItemTypes aType, bool aStartFlag);
 	void UnequipItem(Entity anItem, ItemTypes aType);
 	void GiveItem(Entity anItem);
 	void Choices();
@@ -29,6 +30,7 @@ private:
 	std::string myChoToConvert;
 	int myCho;
 	std::vector<Entity> myInventory;
-	std::vector<Entity> myGearThings[5];
+	//std::vector<Entity> myGearThings;
+	std::map<ItemTypes, Entity> myGear;
 };
 #endif

@@ -3,6 +3,7 @@
 
 Entity::Entity()
 {
+	AliveFlag = false;
 }
 
 Entity::~Entity()

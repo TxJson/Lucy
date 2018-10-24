@@ -42,9 +42,16 @@ inline void Sleep(const int &someTime)
 
 inline void Print(const std::string &someText, const int &aColourCode = Colour::WHITE)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), aColourCode);
-	std::cout << someText << std::endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Colour::WHITE);
+	try
+	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), aColourCode);
+		std::cout << someText << std::endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Colour::WHITE);
+	}
+	catch (...)
+	{
+		std::cout << "ERROR" << std::endl;
+	}
 }
 
 /*

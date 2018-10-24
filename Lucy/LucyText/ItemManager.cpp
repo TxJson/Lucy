@@ -16,6 +16,7 @@ ItemManager::ItemManager()
 		myItems[x].myEnchantable = ConvertToInt(GetFromXml(myFiles[x], "Enchantable"));
 		myItems[x].myHealingConstant = ConvertToInt(GetFromXml(myFiles[x], "HealingConstant"));
 		myItems[x].myCost = ConvertToInt(GetFromXml(myFiles[x], "Cost"));
+		myItems[x].AliveFlag = true;
 
 		//Debug
 		if (myItems[x].myEnchantable)
@@ -56,5 +57,5 @@ Entity ItemManager::GetItemByType(ItemTypes aType)
 			tempEntityOfType.push_back(myItems.at(i));
 		}
 	}
-	return (tempEntityOfType.size() > 0) ? tempEntityOfType.at(Randomize(0, (int)tempEntityOfType.size())) : myItems.at(0);
+	return (tempEntityOfType.size() > 0) ? tempEntityOfType.at(Randomize(0, tempEntityOfType.size())) : myItems.at(0);
 }
