@@ -72,25 +72,7 @@ void Player::Inventory()
 
 			if (INVENTORYLIMIT)
 			{
-				while (1)
-				{
-					Empty();
-					Print
-					(
-						"Name: " + myInventory[myCho].GetName() + "\n" +
-						"Damage: " + std::to_string(myInventory[myCho].GetDamageMultiplier()) + "\n\n" +
-						"Healing Amount: " + std::to_string(myInventory[myCho].myHealingConstant)
-					);
-					for (size_t i = 0; i < 2; i++)
-					{
-						PrintCon("Ability " + std::to_string(i + 1) + ": " + myInventory[myCho].myAbilities[i].myName);
-						Print(" > " + std::to_string(myInventory[myCho].myAbilities[i].myDamage) + " Damage", Colour::LIGHTRED);
-					}
-
-					Print("\n\nPress 'ENTER' to go back.");
-					std::getline(std::cin, myChoToConvert);
-					break;
-				}
+				Inspect(myInventory[myCho]);
 			}
 		}
 		else if (myCho == 2)
@@ -166,8 +148,25 @@ void Player::Gear()
 
 		Print("[1] <Inspect> \n[2] <Unequip> \n[3] <Back>");
 		std::getline(std::cin, myChoToConvert);
-
 		myCho = ConvertToInt(myChoToConvert);
+
+		if (myCho == 1)
+		{
+			Empty();
+			Update();
+			for (size_t i = 0; i < myGear.size(); i++)
+			{
+				Print("[" + std::to_string(i) + "] " + myGear[(ItemTypes)i].GetName(), Colour::LIGHTCYAN);
+			}
+			Print("\nWhich item would you like to inspect?", Colour::YELLOW);
+
+			std::getline(std::cin, myChoToConvert);
+			myCho = ConvertToInt(myChoToConvert);
+			if (myCho >= 0 && myCho <= myGear.size())
+			{
+				Inspect(myGear[(ItemTypes)(myCho)]);
+			}
+		}
 	}
 }
 

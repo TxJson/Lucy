@@ -179,28 +179,9 @@ void Town::Shop()
 			std::getline(std::cin, myChoToConvert);
 
 			myCho = ConvertToInt(myChoToConvert);
-			while (1)
+			if (myCho >= 0 && myCho <= myItems.size())
 			{
-				Empty();
-				Print("Name: " + myItems[myCho].GetName() + "\n");
-				Print
-				(
-					"Healing Amount: " + std::to_string(myItems[myCho].GetHealingConstant()) + "\n" +
-					"Health Addition: " + std::to_string(myItems[myCho].GetHealthMultiplier()) + "\n" +
-					"Protection Addition: " + std::to_string(myItems[myCho].GetProtectionMultiplier()) + "\n"
-					"Damage Addition: " + std::to_string(myItems[myCho].GetDamageMultiplier()) + "\n"
-					, Colour::LIGHTGREEN
-				);
-				for (size_t i = 0; i < 2; i++)
-				{
-					PrintCon("Ability " + std::to_string(i + 1) + ": " + myItems[myCho].myAbilities[i].myName);
-					Print(" > " + std::to_string(myItems[myCho].myAbilities[i].myDamage) + " Damage", Colour::LIGHTRED);
-				}
-				Print("Cost: " + std::to_string(myItems[myCho].GetCost()), Colour::YELLOW);
-
-				Print("\n\nPress 'ENTER' to go back.");
-				std::getline(std::cin, myChoToConvert);
-				break;
+				Inspect(myItems[myCho]);
 			}
 		}
 		else if (myCho == 3)

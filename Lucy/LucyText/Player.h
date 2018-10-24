@@ -30,7 +30,6 @@ private:
 	std::string myChoToConvert;
 	int myCho;
 	std::vector<Entity> myInventory;
-	//std::vector<Entity> myGearThings;
 	std::map<ItemTypes, Entity> myGear;
 };
 #endif
