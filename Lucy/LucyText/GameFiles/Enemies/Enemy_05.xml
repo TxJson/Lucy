@@ -4,7 +4,7 @@
 		<Name> Wolf </Name>
 		<Id> 5 </Id>
 		<Health> 275 </Health>
-		<Damage> 15 </Damage>
+		<Damage> 150 </Damage>
 		<DropRate> 0.75 </DropRate>
 		<Abilities>
 			<A0> Bite </A0>

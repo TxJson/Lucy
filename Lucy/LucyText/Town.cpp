@@ -90,9 +90,9 @@ void Town::OpenDimension()
 
 		if (myCho == 1)
 		{
-			if (myPlayer.myGold >= myDimensionCost)
+			if (myPlayer.GetGold() >= myDimensionCost)
 			{
-				myPlayer.myGold -= myDimensionCost;
+				myPlayer.SetGold(-myDimensionCost);
 				myDimension.Run(myPlayer);
 			}
 			else

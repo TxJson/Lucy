@@ -17,6 +17,7 @@ public:
 
 private:
 	void Fight(Player &aPlayer);
+	void FindItem(Player &aPlayer, Entity anEnemy);
 
 	bool myEmptyRoom;
 	int

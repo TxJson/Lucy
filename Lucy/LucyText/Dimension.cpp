@@ -21,7 +21,7 @@ void Dimension::Run(Player &aPlayer)
 	{
 		Empty();
 
-		if (!aPlayer.AliveFlag)
+		if (!aPlayer.GetActiveFlag())
 		{
 			break;
 		}
@@ -61,7 +61,7 @@ void Dimension::Run(Player &aPlayer)
 		{
 			Fight(aPlayer);
 			Empty();
-			if (!aPlayer.AliveFlag)
+			if (!aPlayer.GetActiveFlag())
 			{
 				break;
 			}
@@ -117,8 +117,6 @@ void Dimension::Next(const int &aChoice)
 
 void Dimension::Fight(Player &aPlayer)
 {
-	//TODO: Fighting mechanics
-
 	std::vector<Entity> tempEnemies;
 	myEnemyAmount = Randomize(4, 8);
 	int tempCho,
@@ -158,10 +156,10 @@ void Dimension::Fight(Player &aPlayer)
 		}
 
 		Print("\nAbilities: ", 10);
-		for (size_t i = 0; i < 2; i++)
+		for (int i = 0; i < 2; i++)
 		{
-			PrintCon("[" + std::to_string(i + 1) + "] " + aPlayer.myAbilities[i].myName);
-			Print(" | Damage: " + std::to_string(((aPlayer.GetDamage() + aPlayer.myAbilities[i].myDamage) / (aPlayer.GetLevel() * 2))));
+			PrintCon("[" + std::to_string(i + 1) + "] " + aPlayer.GetAbilities().at(i).myName);
+			Print(" | Damage: " + std::to_string(((aPlayer.GetDamage() + aPlayer.GetAbilities().at(i).myDamage) / (aPlayer.GetLevel()* aPlayer.GetLevel()) + aPlayer.GetDamageMultiplier())));
 		}
 
 		std::getline(std::cin, myChoToConvert);
@@ -172,28 +170,31 @@ void Dimension::Fight(Player &aPlayer)
 			Sleep(500);
 			if (tempCho > 0 && tempCho < 3)
 			{
-				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.myAbilities[tempCho - 1].myDamage) / (aPlayer.GetLevel()* aPlayer.GetLevel())); //Calculated player damage.
+				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.GetAbilities().at(tempCho - 1).myDamage) / (aPlayer.GetLevel()* aPlayer.GetLevel())+aPlayer.GetDamageMultiplier()); //Calculated player damage.
 				Print("You dealt " + std::to_string(tempDealDamage) + " damage to the " + tempEnemies[i].GetName(), Colour::LIGHTCYAN);
-				tempEnemies[i].SetHealth(-tempDealDamage);
+				tempEnemies[i].ModifyHealth(-tempDealDamage);
 
 				Sleep(500);
 				if (tempEnemies[i].GetHealth() <= 0)
 				{
-					Print(tempEnemies[i].Name + " died. Gained " + std::to_string(tempLootAmount) + " Gold", Colour::LIGHTGREEN);
+					Print(tempEnemies[i].GetName() + " died. Gained " + std::to_string(tempLootAmount) + " Gold", Colour::LIGHTGREEN);
+					Print("Gained 25 Exp!", Colour::LIGHTGREEN);
 					aPlayer.SetGold(tempLootAmount);
-					tempEnemies[i].AliveFlag = false;
+					aPlayer.SetExperience(25);
+					FindItem(aPlayer, tempEnemies[i]);
+					tempEnemies[i].SetActiveFlag(false);
 					myEnemyAmount--;
 				}
 				else
 				{
 					tempAbilityID = Randomize(0, 1);
-					tempTakeDamage = (((tempEnemies[i].GetDamage() + tempEnemies[i].myAbilities[tempAbilityID].myDamage) / aPlayer.GetProtection()) / (aPlayer.GetLevel() *aPlayer.GetLevel()));
-					Print(tempEnemies[i].GetName() + " used " + tempEnemies[i].myAbilities[tempAbilityID].myName + " and you took " + std::to_string(tempTakeDamage) + " damage.", Colour::LIGHTRED);
-					aPlayer.SetHealth(-tempTakeDamage);
+					tempTakeDamage = (((tempEnemies[i].GetDamage() + tempEnemies[i].GetAbilities().at(tempAbilityID).myDamage) / (aPlayer.GetProtection() / (aPlayer.GetLevel() * aPlayer.GetLevel()))));
+					Print(tempEnemies[i].GetName() + " used " + tempEnemies[i].GetAbilities().at(tempAbilityID).myName + " and you took " + std::to_string(tempTakeDamage) + " damage.", Colour::LIGHTRED);
+					aPlayer.ModifyHealth(-tempTakeDamage);
 				}
 			}
 
-			if (!aPlayer.AliveFlag)
+			if (!aPlayer.GetActiveFlag())
 			{
 				break;
 			}
@@ -202,12 +203,20 @@ void Dimension::Fight(Player &aPlayer)
 		tempEnemies = EraseIfDead(tempEnemies);
 		tempEnemies.resize(myEnemyAmount);
 
-		if (aPlayer.myHealth <= 0)
+		if (aPlayer.GetHealth() <= 0)
 		{
 			Sleep(750);
 			Print("\n\nYOU DIED!", 12);
-			aPlayer.AliveFlag = false;
+			aPlayer.SetActiveFlag(false);
 			break;
 		}
+	}
+}
+
+void Dimension::FindItem(Player & aPlayer, Entity anEnemy)
+{
+	if ((float)(Randomize(1, 100) / 100) <= anEnemy.GetDropRate())
+	{
+		aPlayer.ItemHandler();
 	}
 }

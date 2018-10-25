@@ -4,7 +4,7 @@
 		<Name> Spirit </Name>
 		<Id> 4 </Id>
 		<Health> 235 </Health>
-		<Damage> 35 </Damage>
+		<Damage> 350 </Damage>
 		<DropRate> 1 </DropRate>
 		<Abilities>
 			<A0> Haunt </A0>

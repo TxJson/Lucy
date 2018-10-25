@@ -20,10 +20,12 @@ public:
 	void UnequipItem(Entity anItem, ItemTypes aType);
 	void GiveItem(Entity anItem);
 	void Choices();
+	void ItemHandler();
 
 private:
 	ItemManager myItemManager;
 	void CalculateGold();
+	void CalculateLevel();
 	void Statistics();
 	void Inventory();
 	void PrintInventory();

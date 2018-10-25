@@ -12,7 +12,7 @@ inline std::vector<Entity> EraseIfDead(std::vector<Entity> &someEntities)
 		std::remove_if(
 			someEntities.begin(),
 			someEntities.end(),
-			[](Entity const & anEntity) { return !anEntity.AliveFlag; }
+			[](Entity const & anEntity) { return NULL; }
 		),
 		someEntities.end()
 	);
@@ -30,10 +30,10 @@ inline void Inspect(Entity anEntity)
 			"Name: " + anEntity.GetName() + "\n" +
 			"Damage: " + std::to_string(anEntity.GetDamageMultiplier()) + "\n"
 		);
-		for (size_t i = 0; i < 2; i++)
+		for (int i = 0; i < 2; i++)
 		{
-			PrintCon("Ability " + std::to_string(i + 1) + ": " + anEntity.myAbilities[i].myName);
-			Print(" > " + std::to_string(anEntity.myAbilities[i].myDamage) + " Damage", Colour::LIGHTRED);
+			PrintCon("Ability " + std::to_string(i + 1) + ": " + anEntity.GetAbilities().at(i).myName);
+			Print(" > " + std::to_string(anEntity.GetAbilities().at(i).myDamage) + " Damage", Colour::LIGHTRED);
 		}
 
 		Print("\n");
@@ -47,7 +47,7 @@ inline void Inspect(Entity anEntity)
 			, Colour::GREEN
 		);
 
-		Print("Value: " + std::to_string((int)anEntity.GetCost() / 2), Colour::YELLOW);
+		Print("Value: " + std::to_string(anEntity.GetValue()), Colour::YELLOW);
 
 		Print("\n\nPress 'ENTER' to go back.");
 		getchar(); //Waits for ENTER

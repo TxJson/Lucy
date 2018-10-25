@@ -4,7 +4,7 @@
 		<Name> Brute </Name>
 		<Id> 3 </Id>
 		<Health> 500 </Health>
-		<Damage> 15 </Damage>
+		<Damage> 150 </Damage>
 		<DropRate> 0.40 </DropRate>
 		<Abilities>
 			<A0> Slam </A0>

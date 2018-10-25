@@ -4,7 +4,7 @@
 		<Name> Wizard </Name>
 		<Id> 1 </Id>
 		<Health> 265 </Health>
-		<Damage> 10 </Damage>
+		<Damage> 100 </Damage>
 		<DropRate> 0.75 </DropRate>
 		<Abilities>
 			<A0> Implosion </A0>
