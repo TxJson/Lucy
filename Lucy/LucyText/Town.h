@@ -22,16 +22,16 @@ private:
 	void OpenDimension();
 	void Shop();
 	void NotEnoughMoney();
+	bool CheckCertain();
 
 	bool myFirstT;
 	std::string myChoToConvert;
 	int
 		myCho,
-		myDimensionCost;
+		mySpecialDimensionCost;
 	Player myPlayer;
 	ItemManager myItemManager;
 	std::vector<Entity> myItems;
-	Dimension myDimension;
 };
 
 #endif

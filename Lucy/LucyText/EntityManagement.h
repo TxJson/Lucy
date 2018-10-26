@@ -12,7 +12,7 @@ inline std::vector<Entity> EraseIfDead(std::vector<Entity> &someEntities)
 		std::remove_if(
 			someEntities.begin(),
 			someEntities.end(),
-			[](Entity const & anEntity) { return NULL; }
+			[](Entity & anEntity) { return !anEntity.GetActiveFlag(); }
 		),
 		someEntities.end()
 	);

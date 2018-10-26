@@ -21,16 +21,19 @@ public:
 	void GiveItem(Entity anItem);
 	void Choices();
 	void ItemHandler();
+	void Enchantment();
 
 private:
-	ItemManager myItemManager;
 	void CalculateGold();
 	void CalculateLevel();
 	void Statistics();
 	void Inventory();
 	void PrintInventory();
-	std::string myChoToConvert;
+	bool InventoryContains(ItemTypes aType);
+
 	int myCho;
+	ItemManager myItemManager;
+	std::string myChoToConvert;
 	std::vector<Entity> myInventory;
 	std::map<ItemTypes, Entity> myGear;
 };

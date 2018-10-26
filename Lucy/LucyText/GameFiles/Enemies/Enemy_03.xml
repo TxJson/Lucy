@@ -5,7 +5,7 @@
 		<Id> 3 </Id>
 		<Health> 500 </Health>
 		<Damage> 150 </Damage>
-		<DropRate> 0.40 </DropRate>
+		<DropRate> 0,08 </DropRate>
 		<Abilities>
 			<A0> Slam </A0>
 				<A0_Damage> 10 </A0_Damage>

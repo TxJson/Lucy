@@ -12,7 +12,7 @@ EnemyManager::EnemyManager()
 		myEnemies[x].SetHealthMax(ConvertToInt(GetFromXml(myFiles[x], "Health")));
 		myEnemies[x].SetHealth(myEnemies[x].GetHealthMax());
 		myEnemies[x].SetDamage(ConvertToInt(GetFromXml(myFiles[x], "Damage")));
-		myEnemies[x].SetDropRate(std::stof(GetFromXml(myFiles[x], "DropRate"))); //std::stof convert from string to float
+		myEnemies[x].SetDropRate(ConvertToInt(GetFromXml(myFiles[x], "DropRate"))); //std::stof convert from string to float
 		
 		for (int y = 0; y < 2; y++)
 		{

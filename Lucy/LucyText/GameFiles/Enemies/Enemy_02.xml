@@ -5,7 +5,7 @@
 		<Id> 2 </Id>
 		<Health> 275 </Health>
 		<Damage> 150 </Damage>
-		<DropRate> 0.50 </DropRate>
+		<DropRate> 0,34 </DropRate>
 		<Abilities>
 			<A0> Chant </A0>
 				<A0_Damage> 10 </A0_Damage>

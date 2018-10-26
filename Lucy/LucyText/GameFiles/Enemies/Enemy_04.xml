@@ -5,7 +5,7 @@
 		<Id> 4 </Id>
 		<Health> 235 </Health>
 		<Damage> 350 </Damage>
-		<DropRate> 1 </DropRate>
+		<DropRate> 0,50 </DropRate>
 		<Abilities>
 			<A0> Haunt </A0>
 				<A0_Damage> 10 </A0_Damage>

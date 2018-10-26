@@ -30,7 +30,7 @@ void Entity::ModifyHealth(int someHealth)
 
 const bool & Entity::GetActiveFlag()
 {
-	return myActiveFlag;
+	return this->myActiveFlag;
 }
 
 const int & Entity::GetHealth()
@@ -40,7 +40,7 @@ const int & Entity::GetHealth()
 
 const int & Entity::GetHealthMax()
 {
-	return myHealthMax;
+	return this->myHealthMax;
 }
 
 void Entity::SetDamageMultiplier(int anAmount)
@@ -74,18 +74,38 @@ void Entity::SetCost(int anAmount)
 	myCost = anAmount;
 }
 
+void Entity::SetGold(int anAmount)
+{
+	myGold = anAmount;
+}
+
 void Entity::SetValue(int anAmount)
 {
 	myValue = anAmount;
 }
 
-void Entity::SetGold(int someGold)
+void Entity::ModifyGold(int someGold)
 {
 	myGold += someGold;
 	if (myGold < 0)
 	{
 		myGold = 0;
 	}
+}
+
+void Entity::ModifyDamageMultiplier(int anAmount)
+{
+	myDamageMultiplier += anAmount;
+}
+
+void Entity::ModifyHealthMaxMultiplier(int anAmount)
+{
+	myHealthMultiplier += anAmount;
+}
+
+void Entity::ModifyProtectionMultiplier(int anAmount)
+{
+	myProtectionMultiplier += anAmount;
 }
 
 const int & Entity::GetGold()
@@ -140,7 +160,12 @@ const int & Entity::GetCost()
 
 const int & Entity::GetValue()
 {
-	return myValue;
+	return this->myValue;
+}
+
+const bool & Entity::GetEnchantable()
+{
+	return myEnchantable;
 }
 
 const std::string & Entity::GetName()
@@ -148,7 +173,7 @@ const std::string & Entity::GetName()
 	return this->myName;
 }
 
-const float & Entity::GetDropRate()
+const int & Entity::GetDropRate()
 {
 	return this->myDropRate;
 }
@@ -160,12 +185,17 @@ const ItemTypes & Entity::GetItemType()
 
 const int & Entity::GetExperience()
 {
-	return myExperience;
+	return this->myExperience;
 }
 
 const std::map<int, Ability>& Entity::GetAbilities()
 {
-	return myAbilities;
+	return this->myAbilities;
+}
+
+const int & Entity::GetFragments()
+{
+	return this->myFragments;
 }
 
 void Entity::SetExperience(int anAmount)
@@ -198,7 +228,7 @@ void Entity::SetDamage(int anAmount)
 	myDamage = anAmount;
 }
 
-void Entity::SetDropRate(float anAmount)
+void Entity::SetDropRate(int anAmount)
 {
 	myDropRate = anAmount;
 }
@@ -213,10 +243,20 @@ void Entity::SetAbilities(std::map<int, Ability> someAbilities)
 	myAbilities = someAbilities;
 }
 
+void Entity::SetFragments(int anAmount)
+{
+	myFragments = anAmount;
+}
+
 void Entity::ModifyAbilities(int aAbilityNumber, std::string aName, int anAmount)
 {
 	myAbilities[aAbilityNumber].myName = aName;
 	myAbilities[aAbilityNumber].myDamage = anAmount;
+}
+
+void Entity::ModifyFragments(int anAmount)
+{
+	myFragments += anAmount;
 }
 
 void Entity::SetItemType(ItemTypes aType)

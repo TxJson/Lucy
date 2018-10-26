@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lucy>
+	<Item>
+		<Name> ScrollOfEternity </Name>
+		<Id> 10 </Id>
+		<Type> 5 </Type>
+		<Abilities>
+			<A0> None </A0>
+				<A0_Damage> 0 </A0_Damage>
+			<A1> None </A1>
+				<A1_Damage> 0 </A1_Damage>
+		<Abilities>
+		<DamageMultiplier> 1500 </DamageMultiplier>
+		<ProtectionMultiplier> 0 </ProtectionMultiplier>
+		<HealthMultiplier> 2500 </HealthMultiplier>
+		<HealingConstant> 0 </HealingConstant>
+		<Enchantable> 0 </Enchantable>
+		<Cost> 7500 </Cost>
+	</Item>
+</Lucy>

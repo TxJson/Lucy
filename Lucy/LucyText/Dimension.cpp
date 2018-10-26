@@ -1,13 +1,17 @@
 #include "Dimension.h"
 #include "EntityManagement.h"
 
-Dimension::Dimension()
+Dimension::Dimension(bool aSpecialFlag)
 {
+	mySpecialDimensionFlag = aSpecialFlag;
 	myEmptyRoom = false;
 	myCurrentRoom = 0;
-	myDoorLimit = 5;
-	myDimensionLimit = 8;
-	myDimensionLow = 3;
+	myDoorLimit = (aSpecialFlag) ? 15 : 5;
+	myDimensionLimit = (aSpecialFlag) ? 16: 8;
+	myDimensionLow = (aSpecialFlag) ? 8: 3;
+	myBossBuffAmount = (aSpecialFlag) ? 20 : 10; //In the case of a boss, increases boss stats by this amount
+	mySpecialDungeonBonus = 10;
+	myFragmentDrop = Randomize(1, 25);
 }
 
 Dimension::~Dimension()
@@ -28,6 +32,12 @@ void Dimension::Run(Player &aPlayer)
 
 		if (myCurrentRoom >= myDimensionSize)
 		{
+			Battle(aPlayer, true);
+			Print("You've made it out alive!", Colour::LIGHTGREEN);
+			Print("+" + std::to_string(myFragmentDrop) + " Fragments!", Colour::LIGHTGREEN);
+			aPlayer.ModifyFragments(myFragmentDrop);
+			Print("\nPress 'ENTER' to continue.");
+			getchar();
 			break;
 		}
 
@@ -56,10 +66,11 @@ void Dimension::Run(Player &aPlayer)
 				PrintCon("[" + std::to_string(i + 1), myDoorColour[myCurrentRoom][i]);
 				Print("] " + myRooms[myCurrentRoom][i], myDoorColour[myCurrentRoom][i]);
 			}
+			Print("\n[" + std::to_string(myDoorAmount[myCurrentRoom]+1) + "] Player Information", Colour::WHITE);
 		}
 		else
 		{
-			Fight(aPlayer);
+			Battle(aPlayer, false);
 			Empty();
 			if (!aPlayer.GetActiveFlag())
 			{
@@ -72,6 +83,10 @@ void Dimension::Run(Player &aPlayer)
 		std::getline(std::cin, myChoToConvert);
 
 		Next(ConvertToInt(myChoToConvert));
+		if (ConvertToInt(myChoToConvert) == myDoorAmount[myCurrentRoom]+1)
+		{
+			aPlayer.Choices();
+		}
 	}
 }
 
@@ -80,9 +95,9 @@ void Dimension::Generate()
 	myDimensionSize = (int)Randomize(myDimensionLow, myDimensionLimit);
 	for (size_t x = 0; x < myDimensionSize; x++)
 	{
-		myRoomSize = Randomize(myDimensionLow, myDoorLimit);
-		myCorrectDoor[x] = Randomize(1, myRoomSize);
-		myDoorAmount[x] = myRoomSize;
+		myRoomSize = Randomize(myDimensionLow, myDoorLimit); //Sets the size of the room
+		myCorrectDoor[x] = Randomize(1, myRoomSize); //Sets the correct door to continue into the dimension
+		myDoorAmount[x] = myRoomSize; //Determine door amount per room
 		for (size_t y = 0; y < myRoomSize; y++)
 		{
 			myRooms[x][y] = myDoorTypes[(int)Randomize(0, 14)] + " Door";
@@ -115,44 +130,53 @@ void Dimension::Next(const int &aChoice)
 	}
 }
 
-void Dimension::Fight(Player &aPlayer)
+void Dimension::Battle(Player &aPlayer, bool aBossFlag)
 {
 	std::vector<Entity> tempEnemies;
-	myEnemyAmount = Randomize(4, 8);
+	myEnemyAmount = (aBossFlag) ? 1 : Randomize(4, 8);
 	int tempCho,
-		tempLootAmount = 5,
 		tempTakeDamage,
 		tempDealDamage,
 		tempAbilityID;
 
+	int tempEnemyExpDrop = (mySpecialDimensionFlag) ? 25 * mySpecialDungeonBonus : 25;
+	int tempBattleFinishDrop = (mySpecialDimensionFlag) ? 50 * mySpecialDungeonBonus : 50;
+	int tempLootAmount = (mySpecialDimensionFlag) ? 50 : 5;
+
 	for (size_t i = 0; i < myEnemyAmount; i++)
 	{
 		tempEnemies.push_back(myEnemyManager.GetEnemy());
+
+		if (aBossFlag) 
+		{
+			tempEnemies[i].SetHealthMax(tempEnemies[i].GetHealthMax() * 2);
+			tempEnemies[i].SetHealth(tempEnemies[i].GetHealthMax());
+		}
 		Sleep(10);
 	}
+
 
 	while (1)
 	{
 		tempCho = 0;
 		Empty();
+		aPlayer.Update();
 
 		if (tempEnemies.empty())
 		{
-			Print("All enemies are dead, you gained 50 Gold.", 10);
-			aPlayer.SetGold(50);
+			Print("All enemies are dead, you gained " + std::to_string(tempBattleFinishDrop) + " Gold.", 10);
+			aPlayer.ModifyGold(tempBattleFinishDrop);
 
 			Print("Press 'ENTER' to continue.");
-			std::getline(std::cin, myChoToConvert);
+			getchar();
 			break;
 		}
+		Print((aBossFlag) ? "BOSS BATTLE: " : "BATTLE: ", Colour::LIGHTCYAN); //Changes text depending on the aBossFlag variable
 
-		aPlayer.Update();
-
-		Print("Enemies: ", 12);
 		for (size_t i = 0; i < myEnemyAmount; i++)
 		{
-			PrintCon(tempEnemies[i].GetName());
-			Print(" > HP: " + std::to_string(tempEnemies[i].GetHealth()), 12);
+			PrintCon((aBossFlag) ? "The Almighty " + tempEnemies[i].GetName() : tempEnemies[i].GetName());
+			Print(" > HP: " + std::to_string(tempEnemies[i].GetHealth()), Colour::LIGHTRED);
 		}
 
 		Print("\nAbilities: ", 10);
@@ -168,19 +192,20 @@ void Dimension::Fight(Player &aPlayer)
 		for (size_t i = 0; i < tempEnemies.size(); i++)
 		{
 			Sleep(500);
-			if (tempCho > 0 && tempCho < 3)
+			if (tempCho > 0 && tempCho < (aPlayer.GetAbilities().size()+1))
 			{
 				tempDealDamage = ((aPlayer.GetDamage() + aPlayer.GetAbilities().at(tempCho - 1).myDamage) / (aPlayer.GetLevel()* aPlayer.GetLevel())+aPlayer.GetDamageMultiplier()); //Calculated player damage.
-				Print("You dealt " + std::to_string(tempDealDamage) + " damage to the " + tempEnemies[i].GetName(), Colour::LIGHTCYAN);
+				Print("Dealt " + std::to_string(tempDealDamage) + " damage to the " + tempEnemies[i].GetName(), Colour::LIGHTCYAN);
 				tempEnemies[i].ModifyHealth(-tempDealDamage);
 
 				Sleep(500);
 				if (tempEnemies[i].GetHealth() <= 0)
 				{
-					Print(tempEnemies[i].GetName() + " died. Gained " + std::to_string(tempLootAmount) + " Gold", Colour::LIGHTGREEN);
-					Print("Gained 25 Exp!", Colour::LIGHTGREEN);
-					aPlayer.SetGold(tempLootAmount);
-					aPlayer.SetExperience(25);
+					PrintCon(tempEnemies[i].GetName() + " died.", Colour::LIGHTGREEN);
+					PrintCon(" | +" + std::to_string(tempLootAmount) + " Gold!", Colour::YELLOW);
+					Print(" | +" + std::to_string(tempEnemyExpDrop) + " Exp!", Colour::LIGHTGREEN);
+					aPlayer.ModifyGold(tempLootAmount);
+					aPlayer.SetExperience(tempEnemyExpDrop);
 					FindItem(aPlayer, tempEnemies[i]);
 					tempEnemies[i].SetActiveFlag(false);
 					myEnemyAmount--;
@@ -189,9 +214,12 @@ void Dimension::Fight(Player &aPlayer)
 				{
 					tempAbilityID = Randomize(0, 1);
 					tempTakeDamage = (((tempEnemies[i].GetDamage() + tempEnemies[i].GetAbilities().at(tempAbilityID).myDamage) / (aPlayer.GetProtection() / (aPlayer.GetLevel() * aPlayer.GetLevel()))));
-					Print(tempEnemies[i].GetName() + " used " + tempEnemies[i].GetAbilities().at(tempAbilityID).myName + " and you took " + std::to_string(tempTakeDamage) + " damage.", Colour::LIGHTRED);
+					tempTakeDamage *= (aBossFlag) ? myBossBuffAmount : 1; //Increases the damage if enemy is a boss
+					PrintCon(tempEnemies[i].GetName() + " used " + tempEnemies[i].GetAbilities().at(tempAbilityID).myName, Colour::LIGHTRED);
+					Print(" | -" + std::to_string(tempTakeDamage) + " Health", Colour::RED);
 					aPlayer.ModifyHealth(-tempTakeDamage);
 				}
+				Sleep(500);
 			}
 
 			if (!aPlayer.GetActiveFlag())
@@ -201,7 +229,6 @@ void Dimension::Fight(Player &aPlayer)
 		}
 
 		tempEnemies = EraseIfDead(tempEnemies);
-		tempEnemies.resize(myEnemyAmount);
 
 		if (aPlayer.GetHealth() <= 0)
 		{
@@ -215,7 +242,7 @@ void Dimension::Fight(Player &aPlayer)
 
 void Dimension::FindItem(Player & aPlayer, Entity anEnemy)
 {
-	if ((float)(Randomize(1, 100) / 100) <= anEnemy.GetDropRate())
+	if ((Randomize(1, 100)) <= anEnemy.GetDropRate())
 	{
 		aPlayer.ItemHandler();
 	}

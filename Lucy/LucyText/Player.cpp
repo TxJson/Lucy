@@ -5,13 +5,13 @@
 
 Player::Player()
 {
-	myName = "Lucy";
 	myHealthMax = 1250;
 	myHealth = myHealthMax;
 	myDamage = 45;
 	myLevel = 1;
 	myExperience = 0;
 	myGold = 275;
+	myFragments = 50;
 	myProtection = 1;
 	myAbilities[0].myName = "Hit";
 	myAbilities[0].myDamage = 15;
@@ -36,10 +36,10 @@ void Player::Update()
 	CalculateGold();
 	Print
 	(
-		"Name: " + myName + "\n"
-		+ "Level: " + std::to_string(myLevel) + "\n"
+		"Level: " + std::to_string(myLevel) + "\n"
 		+ "Health: " + std::to_string(myHealth) + "\n"
 		+ "Gold: " + std::to_string(myGold) + "\n"
+		+ "Fragments: " + std::to_string(myFragments) + "\n"
 		, Colour::MAGENTA
 	);
 }
@@ -230,10 +230,6 @@ void Player::EquipItem(Entity anItem, ItemTypes aType, bool aStartFlag = false)
 
 void Player::UnequipItem(Entity anItem, ItemTypes aType)
 {
-	if (!myGear[aType].GetActiveFlag())
-	{
-		return;
-	}
 	myInventory.push_back(myGear[aType]);
 	if (aType == ItemTypes::WEAPON)
 	{
@@ -296,10 +292,7 @@ void Player::ItemHandler()
 	Entity tempItem = myItemManager.GetRandomItem();
 	while (1) 
 	{
-		Empty();
-		Update();
-		
-		Print("You found a " + tempItem.GetName(), Colour::LIGHTGREEN);
+		Print("\nYou found a " + tempItem.GetName(), Colour::LIGHTGREEN);
 		Print("[0] Pick up \n[1] Discard");
 		
 		std::getline(std::cin, myChoToConvert);
@@ -319,9 +312,105 @@ void Player::ItemHandler()
 			Print("Press 'ENTER' to continue.");
 			getchar();
 
-			Empty();
 			break;
 		}
+	}
+}
+
+void Player::Enchantment()
+{
+	if (!InventoryContains(ItemTypes::SCROLL))
+	{
+		Print("You can't use this unless you have any scrolls available.");
+		Print("Press 'ENTER' to return.");
+		getchar();
+		return;
+	}
+	std::vector<Entity> tempScrolls;
+	for (size_t i = 0; i < myInventory.size(); i++)
+	{
+		if (myInventory[i].GetItemType() == ItemTypes::SCROLL) 
+		{
+			tempScrolls.push_back(myInventory[i]);
+			myInventory[i].SetActiveFlag(false);
+		}
+	}
+	myInventory = EraseIfDead(myInventory);
+	while (1)
+	{
+		Print("Items: ", Colour::CYAN);
+		for (size_t i = 0; i < myInventory.size(); i++)
+		{
+			PrintCon("[" + std::to_string(i) + "] " + myInventory[i].GetName());
+			if (myInventory[i].GetEnchantable())
+			{
+				Print(" > Enchantable", Colour::GREEN);
+			}
+			else
+			{
+				Print(" > Not Enchantable", Colour::LIGHTRED);
+			}
+		}
+		Print("[" + std::to_string(myInventory.size() + 1) + "] Back");
+
+		Print("Which item would you like to enchant?");
+		std::getline(std::cin, myChoToConvert);
+		int tempItemCho = ConvertToInt(myChoToConvert);
+
+		if (tempItemCho == (myInventory.size() + 1)) 
+		{
+			for (size_t i = 0; i < tempScrolls.size(); i++)
+			{
+				GiveItem(tempScrolls[i]);
+			}
+			break;
+		}
+			if (INVENTORYLIMIT)
+			{
+				if (myInventory[myCho].GetEnchantable())
+				{
+					while (1)
+					{
+						Print("Enchantment Available:");
+						for (size_t i = 0; i < tempScrolls.size(); i++)
+						{
+							Print("[" + std::to_string(i) + "] " + tempScrolls[i].GetName());
+						}
+
+						Print("Choose a scroll to enchant with or to inspect.");
+						std::getline(std::cin, myChoToConvert);
+						myCho = ConvertToInt(myChoToConvert);
+
+						if (myCho >= 0 && myCho <= tempScrolls.size()) 
+						{
+							Print("What would you like to do?", Colour::YELLOW);
+							Print("[1] Enchant \n[2] Inspect");
+							std::getline(std::cin, myChoToConvert);
+							int tempCho = ConvertToInt(myChoToConvert);
+
+							if (tempCho == 1) 
+							{
+								Print("You enchanted your " + myInventory[tempItemCho].GetName() + " with the " + tempScrolls[myCho].GetName());
+								myInventory[tempItemCho].ModifyDamageMultiplier(tempScrolls[myCho].GetDamageMultiplier());
+								myInventory[tempItemCho].ModifyHealthMaxMultiplier(tempScrolls[myCho].GetHealthMultiplier());
+								myInventory[tempItemCho].ModifyProtectionMultiplier(tempScrolls[myCho].GetDamageMultiplier());
+
+								Print("Press 'ENTER' to continue.");
+								getchar();
+								break;
+							}
+							else if (tempCho == 2)
+							{
+								Inspect(tempScrolls[myCho]);
+							}
+						}
+					}
+				}
+				else
+				{
+					Print("That item is not enchantable.", Colour::LIGHTRED);
+				}
+			}
 	}
 }
 
@@ -332,18 +421,49 @@ void Player::CalculateGold()
 
 void Player::CalculateLevel()
 {
-	if (myExperience >= (50 * myLevel))
+	while (myExperience >= (50 * myLevel)) 
 	{
 		myLevel += 1;
-		myHealthMax += (100 * myLevel/2);
-		myHealth += (100 * myLevel/2);
+		myHealthMax += (100 * myLevel / 2);
+		myHealth += (100 * myLevel / 2);
 		myDamage += (20 * myLevel / 2);
 		myProtection += (6 * myLevel / 2);
+		Print("LEVEL UP!", Colour::LIGHTGREEN);
+		Sleep(750);
 	}
+	Empty();
 }
 
 void Player::Statistics()
 {
+	Empty();
+	Print("Statistics:", Colour::CYAN);
+
+	PrintCon("Level: ", Colour::LIGHTCYAN);
+	Print(std::to_string(GetLevel()));
+	PrintCon("Health: ", Colour::LIGHTCYAN);
+	Print(std::to_string(GetHealth()));
+	PrintCon("Max Health: ", Colour::LIGHTCYAN);
+	Print(std::to_string(GetHealthMax()));
+	PrintCon("Base Damage: ", Colour::LIGHTCYAN);
+	Print(std::to_string(GetDamage()));
+	PrintCon("Protection: ", Colour::LIGHTCYAN);
+	Print(std::to_string(GetProtection()));
+	PrintCon("EXP: ", Colour::LIGHTCYAN);
+	Print(std::to_string(GetExperience()) + "/" + std::to_string(50 * myLevel));
+
+	for (int i = 0; i < 2; i++)
+	{
+		Print("Ability " + std::to_string(i) + ":", Colour::MAGENTA);
+		PrintCon("   Name: ", Colour::MAGENTA);
+		PrintCon(GetAbilities().at(i).myName);
+		PrintCon(" > ", Colour::RED);
+		PrintCon(std::to_string(GetAbilities().at(i).myDamage));
+		Print(" Damage", Colour::RED);
+	}
+
+	Print("\nPress 'ENTER' to continue.");
+	getchar();
 }
 
 void Player::PrintInventory()
@@ -354,4 +474,18 @@ void Player::PrintInventory()
 		Print("[" + std::to_string(i) + "] " + myInventory[i].GetName());
 	}
 	Print("\n");
+}
+
+bool Player::InventoryContains(ItemTypes aType)
+{
+	bool tempStatement = false;
+	for (size_t i = 0; i < myInventory.size(); i++)
+	{
+		if (myInventory[i].GetItemType() == aType) 
+		{
+			tempStatement = true;
+			break;
+		}
+	}
+	return tempStatement;
 }

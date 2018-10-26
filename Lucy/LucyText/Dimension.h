@@ -8,7 +8,7 @@
 class Dimension
 {
 public:
-	Dimension();
+	Dimension(bool aSpecialFlag);
 	~Dimension();
 
 	void Run(Player &aPlayer);
@@ -16,10 +16,12 @@ public:
 	void Next(const int &aChoice);
 
 private:
-	void Fight(Player &aPlayer);
+	void Battle(Player &aPlayer, bool aBossFlag);
 	void FindItem(Player &aPlayer, Entity anEnemy);
 
-	bool myEmptyRoom;
+	bool
+		myEmptyRoom,
+		mySpecialDimensionFlag;
 	int
 		myDoorLimit,
 		myRoomSize,
@@ -27,7 +29,10 @@ private:
 		myDimensionLimit,
 		myDimensionLow,
 		myDimensionSize,
-		myEnemyAmount;
+		myEnemyAmount,
+		myBossBuffAmount,
+		mySpecialDungeonBonus,
+		myFragmentDrop;
 
 	EnemyManager myEnemyManager;
 

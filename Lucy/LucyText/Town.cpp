@@ -4,7 +4,7 @@
 Town::Town()
 {
 	myFirstT = true;
-	myDimensionCost = 50;
+	mySpecialDimensionCost = 25;
 }
 
 Town::~Town()
@@ -38,7 +38,7 @@ void Town::Run(const Player aPlayer)
 				Shop();
 				break;
 			case 2:
-				NotAvailable();
+				myPlayer.Enchantment();
 				break;
 			case 3:
 				OpenDimension();
@@ -47,7 +47,7 @@ void Town::Run(const Player aPlayer)
 				myPlayer.Choices();
 				break;
 			case 47190:
-				myPlayer.SetGold(15000); //Cheat code for easier debugging.
+				myPlayer.ModifyGold(1000000); //Cheat code for easier debugging.
 				break;
 			}
 		}
@@ -76,34 +76,42 @@ void Town::NotAvailable()
 
 void Town::OpenDimension()
 {
-	while (1)
+	int tempDimensionCho;
+	bool tempCho;
+		Empty();
+		myPlayer.Update();
+
+	Print("Which kind of dimension would you like to open?", Colour::LIGHTCYAN);
+	Print("[1] <Normal> \n[2] <Special>");
+		
+	std::getline(std::cin, myChoToConvert);
+	tempDimensionCho = ConvertToInt(myChoToConvert);
+
+	if (tempDimensionCho == 1) 
+	{
+		tempCho = CheckCertain();
+		if (tempCho)
+		{
+			Dimension(false).Run(myPlayer);
+		}
+	}
+	else if (tempDimensionCho == 2)
 	{
 		Empty();
 		myPlayer.Update();
-		Print("Opening a dimension costs " +
-			std::to_string(myDimensionCost) +
-			" Gold. \nAre you sure you want to proceed?", 12);
-		Print("[1] Yes\n[2] No");
-
-		std::getline(std::cin, myChoToConvert);
-		myCho = ConvertToInt(myChoToConvert);
-
-		if (myCho == 1)
+		Print("\nOpening a special dimension costs " + std::to_string(mySpecialDimensionCost) + " Fragments", Colour::LIGHTRED);
+		tempCho = CheckCertain();
+			
+		if (tempCho) 
 		{
-			if (myPlayer.GetGold() >= myDimensionCost)
+			if (myPlayer.GetFragments() >= mySpecialDimensionCost) 
 			{
-				myPlayer.SetGold(-myDimensionCost);
-				myDimension.Run(myPlayer);
+				Dimension(true).Run(myPlayer);
 			}
-			else
+			else 
 			{
 				NotEnoughMoney();
 			}
-			break;
-		}
-		else if (myCho == 2)
-		{
-			break;
 		}
 	}
 }
@@ -150,7 +158,7 @@ void Town::Shop()
 				{
 					if (myPlayer.GetGold() >= myItems[myCho].GetCost())
 					{
-						myPlayer.SetGold(-myItems[myCho].GetCost());
+						myPlayer.ModifyGold(-myItems[myCho].GetCost());
 						Print("You successfully bought a " + myItems[myCho].GetName());
 						myPlayer.GiveItem(myItems[myCho]);
 						Sleep(1000);
@@ -198,6 +206,17 @@ void Town::Shop()
 
 void Town::NotEnoughMoney()
 {
-	Print("Not enough money.", 12);
+	Print("Not enough money/fragments.", 12);
 	Sleep(1000);
+}
+
+bool Town::CheckCertain()
+{
+	Print("\nAre you certain?", Colour::YELLOW);
+	Print("[1] <Yes>\n[2] <No>");
+
+	std::getline(std::cin, myChoToConvert);
+	myCho = ConvertToInt(myChoToConvert);
+
+	return (myCho == 1) ? true : false;
 }
